@@ -1,0 +1,22 @@
+Need to create the following functions :
+------------------------------------------
+
+enemyAttack();
+  Fairly obvious what this will do. If there is any doubt refer to attack(); and apply damage to the player.
+
+treasure(); 
+  Will be used for awarding HP back to player after defeating whatever monster is in the room.
+
+move();
+  Will be used to navigate in between rooms. North, South, East, West.
+  Also we need to include some sort of way to check if a player has already entered a room or not and if he has;
+    then there shall be no monsters present in the room.
+
+bossEntry();
+  Will be used to setup proper enemy variables for use agaisnt Boss. Also should include some dialogue.
+  
+Need to also add these feature:
+------------------------------------------
+
+Create a way to apply some sort of percentage decrease or increase of damage depending on what weapon you are using against certain enemies.
+  tldr; enemies need strengths and weaknesses to certain attacks.
