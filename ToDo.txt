@@ -1,3 +1,16 @@
+Need to modify the following functions :
+------------------------------------------
+
+attack();
+  Needs to repeat until queue.isEmpty.  /This is in Game.scala\
+  Possible way to fix :
+    while (queue.nonEmpty)  {
+      while (plyHP > 0 etc etc...)
+      if (enemyHP <= 0) {
+        queue = queue.drop(1);
+      }
+    }
+
 Need to create the following functions :
 ------------------------------------------
 
@@ -15,7 +28,7 @@ move();
 bossEntry();
   Will be used to setup proper enemy variables for use agaisnt Boss. Also should include some dialogue.
   
-Need to also add these feature:
+Need to also add these feature :
 ------------------------------------------
 
 Create a way to apply some sort of percentage decrease or increase of damage depending on what weapon you are using against certain enemies.
