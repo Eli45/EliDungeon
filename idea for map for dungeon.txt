@@ -1,0 +1,84 @@
+I : unexplored
+X : explored
+N : inaccessible ? Maybe ?
+
+	if (Explored.contains(3)	{
+		print(X)
+	}
+	else { print(I); }
+	if (Explored.contains(6))	{
+		print(X)
+	}
+	else { print(I) }
+	
+	
+How it would look at the start.
+
+I-X-I
+I-I-I
+I-I-I
+  I
+  
+-----------------------------------------------------------
+Possibly even don't include any unexplored at all and only print explored.
+So:
+
+if (Explored.contains(3)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(6)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(9)	{ print("X"); }
+else { print(" "); }
+
+if (Explored.contains(1)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(4)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(7)	{ print("X"); }
+else { print(" "); }
+
+if (Explored.contains(2)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(5)	{ print("X"); }
+else { print(" "); }
+if (Explored.contains(8)	{ print("X"); }
+else { print(" "); }
+
+-----------------------------------------------------------
+Possibly even create a function for it !
+
+def exploredMap(Level:Int) =	{
+	if (Explored.contains(Level)	{ print("X"); }
+	else { print(" "); }
+}
+var i = 3;
+while (i < 9)	{
+	exploredMap(3); exploredMap(6); exploredMap(9);
+	i += 3;
+}
+var i = 1;
+while (i < 9)	{
+	exploredMap(1); exploredMap(4); exploredMap(7);
+	i += 3;
+}
+var i = 2;
+while (i < 9)	{
+	exploredMap(2); exploredMap(5); exploredMap(8);
+	i += 3;
+}
+-----------------------------------------------------------
+Make the loop even more advanced?
+OK!
+
+def forLoop(cond1:Int, cond2:Int, increaseBy:Int) (body: => Unit):Unit =	{
+		var i = cond1;
+		if (i <= cond2)	{
+			body;
+			i += increaseBy
+			forLoop(i,cond2,increaseBy)(body)
+		}
+	}
+	
+forLoop(3, 9, 3)	{ exploredMap(i) }
+forLoop(1, 7, 3)	{ exploredMap(i) }
+forLoop(2, 8, 3)	{ exploredMap(i) }
