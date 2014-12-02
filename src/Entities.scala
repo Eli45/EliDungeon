@@ -1,13 +1,15 @@
-object Entities extends App {
+object Entities	{
 	import publicVariables._
 	/* ---- LOW LEVEL ---- */
 	def Slime =	{
-		mHP = 13;
+		enemyHP = 13;
 		mDAM = 6;
+		mMiss = 0.20;
 	}
 	def Lizard =	{
-		mHP = 6;
+		enemyHP = 6;
 		mDAM = 8;
+		mMiss = 0.10;
 	}
 	/* ---- /LOW LEVEL ---- */
 	
@@ -17,19 +19,22 @@ object Entities extends App {
 	
 	/* ---- HIGH LEVEL ---- */
 	def Drake =	{
-		mHP = 35;
+		enemyHP = 35;
 		mDAM = 17;
+		mMiss = 0.35
 	}
 	def Matt =	{
-		mHP = 50;
+		enemyHP = 50;
 		mDAM = 13;
+		mMiss = 0.4
 	}
 	/* ---- /HIGH LEVEL ---- */
 	
 	/* ---- BOSS ---- */
 	def KingKelman =	{
-		mHP = 100;
+		enemyHP = 100;
 		mDAM = 15;
+		mMiss = 0.07
 	}
 	/* ---- /BOSS ---- */
 

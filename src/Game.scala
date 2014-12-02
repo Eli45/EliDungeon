@@ -1,11 +1,12 @@
+/*
+ * I lied about import not working. All we need to do is make sure the other folders are only 'object x {}' not 'object x extends App {}'
+ */
 object Game extends App {
-	import publicVariables._
-	import Entities._
-	import Functions._
+	import publicVariables._, Entities._, Functions._
+	intro();
 	while (plyHP > 0 && curLvl != 10)	{
 		generateLevel();
 		printLevelInfo();
-		setupEnemy();
 		while (plyHP > 0 && enemyHP > 0)	{
 			combat();
 		}

@@ -1,10 +1,16 @@
-object Functions extends App {
+object Functions	{
 	import publicVariables._
 	import Entities._
 	/* ---- LEVELS ---- */
+	def intro()	=	{
+		println("You are a knight. Go kill stuff.")
+		println("Press enter to continue.")
+		readLine();
+	}
 	def generateLevel(Level:Unit)	=	{
 		//Checks what rooms are connected to our current room.
-		if (curLvl == 1)	{linksTo = Array("east","west","south");}//add more
+		linksTo = Array("north","south","east","west");
+		//if (curLvl == 1)	{linksTo = Array("east","west","south");}//add more
 		generateEnemies();
 		
 		def generateEnemies() =	{
@@ -24,16 +30,31 @@ object Functions extends App {
 				else if (roll == 4)	{monsterToQueue = "Matt"}
 				queue = queue :+ monsterToQueue
 			}
-			if (queue.isEmpty)	{ enemyHP = 0; }
+			setupEnemy();
 		}
 	}
-	
+	def setupEnemy() =	{
+	  	//Sets up our monster variables correctly based on the current opponent.
+		if (queue.nonEmpty)	{
+			if (queue(0) == "Slime")	{Slime;}
+			else if (queue(0) == "Lizard")	{Lizard;}
+			else if (queue(0) == "Drake")	{Drake;}
+			else	{Matt;}
+		}
+	}
 	def printLevelInfo() =	{
-		if (enemyHP != 0)	{
+		if (queue.nonEmpty)	{
+			println("Monsters in this room.\n------------------")
 			for (i <- 0 to queue.length-1)	{
-				println(s"There is a $queue(i) here.");
+				if (i != queue.length-1)	{
+					print(queue(i)+", ");
+				}
+				else	{
+					print(queue(i)+ ".")
+				}
+				println()
 			}
-			println(s"You will be facing $queue(0) first.");
+			println("You will be facing "+queue(0)+" first.");
 		}
 		else	{
 			println("There is nothing in the room.");
@@ -42,53 +63,108 @@ object Functions extends App {
 	/* ---- /LEVELS ---- */
 	
 	/* ---- COMBAT ---- */
-	def setupEnemy() =	{
-	  	//Sets up our monster variables correctly based on the current opponent.
-		if (queue(0) == "Slime")	{Slime;}
-		else if (queue(0) == "Lizard")	{Lizard;}
-		else if (queue(0) == "Drake")	{Drake;}
-		else	{Matt;}
-	}
 	def combat() =	{
-		chooseWeapon();
-		def chooseWeapon() =	{
-			var wepDMG = 0;
-			var retry = true;
-			while (retry)	{
-				println("What weapon would you like to use to attack?");
-				wep = readLine().toLowerCase;
-				if (weapons.contains(wep))	{
-					wepDMG = weapons.apply(wep)
-					retry = false;
+		while (queue.nonEmpty && plyHP > 0)	{
+			chooseWeapon();
+			def chooseWeapon() =	{
+				var wepDMG = 0;
+				var retry = true;
+				while (retry)	{
+					println();
+					println("What weapon would you like to use to attack?\nWeapons include: 'bow', 'longsword', 'shortsword'.");
+					wep = readLine().toLowerCase;
+					if (weapons.contains(wep))	{
+						wepDMG = weapons.apply(wep)
+						retry = false;
+					}
+					else { retry = true; println(wep+" is not a weapon.")}
 				}
-				else { retry = true; }
-			}
-			dicerolls();
-			def dicerolls() =	{
-				var roll = Math.round(Math.random()*wepDMG)
-				if (roll < 4)	{ println("Your attack missed!") }
-				else	{
-					//TO BE ADDED.
+				dicerolls();
+				def dicerolls() =	{
+					var roll = Math.round(Math.random()*wepDMG)
+					if (wep != "bow" && roll < 4)	{ println("Your attack missed!") }
+					else if (wep == "bow" && roll < 2)	{ println("Your attack missed!") }
+					else	{
+						var newRoll = roll.toDouble
+						def typeDamage() =	{
+							//This is really inefficient, possibly look into a better way.
+							if (queue(0) == "Slime")	{
+								if (wep == "bow")	{ newRoll = newRoll * .85 }
+								else if (wep == "longsword")	{ newRoll = newRoll * 1.25 }
+								else	{ newRoll = newRoll * 1 }
+							}
+							else if (queue(0) == "Lizard")	{
+								if (wep == "bow")	{  }
+								else if (wep == "longsword")	{  }
+								else	{  }
+							}
+							else if (queue(0) == "Drake")	{}
+							else if (queue(0) == "Matt")	{}
+						}
+						var finalDAM = newRoll.toInt
+						println("You attacked "+queue(0)+ s" with $wep for $finalDAM.")
+						enemyHP -= finalDAM;
+						if (enemyHP <= 0) { enemyHP = 0; }
+						println(queue(0)+s"'s HP is now $enemyHP.")
+					}
 				}
-				println(s"$queue(0) attacked with $wep for $wepDMG.")
-				enemyHP -= wepDMG;
-				println(s"$queue(0)'s HP is now $enemyHP.")
-			}
-			enemyAttack();
-			def enemyAttack() =	{
-				
+				if (enemyHP <= 0) { 
+					queue = queue.drop(1);
+					if (queue.nonEmpty)	{
+						setupEnemy();
+						println("You will now be facing " +queue(0));
+						println();
+					}
+				}
+				else { enemyAttack(); }
+				def enemyAttack() =	{
+					var roll = Math.round(Math.random()*mDAM)
+					var Missed = roll * mMiss	//Look at these values. They feel wrong.
+					if (Missed <= roll*.25)	{
+						println("Enemy missed!")
+					}
+					else {
+						println(queue(0)+s" attacked you for $roll")
+						plyHP -= roll.toInt;
+						if (plyHP < 0)	{ plyHP = 0; }
+						println("Your HP is now "+plyHP)
+						println();
+					}
+				}
 			}
 		}
 	}
 	def treasure() =	{
-			
+		var x = Math.round(Math.random()*25);
+		var potion = 0;
+		if (x <= 7)	{potion = 15;}	//Add chance to get nothing.
+		else if (x > 7 && x <= 15)	{potion = 25;}
+		else if (x > 15 && x <= 23)	{potion = 35;}
+		else	{potion = 50;}
+		plyHP += potion;
+		if (plyHP > 100)	{ plyHP = 100; }
+		println(s"You find a $potion HP potion that restores your hp to $plyHP.");
 	}
 	def move() =	{
-			
+		println("What direction would you like to travel in?")
+		print("Your options include ")
+		for (i <- 0 to linksTo.length-1)	{
+			if (i != linksTo.length-1)	{
+				print(linksTo(i) +", ");
+			}
+			else	{
+				print(linksTo(i)+".")
+			}
+		}
+		var direction = readLine();
+		println("You enter the "+direction+"ern room.")
+		println()
 	}
 	
 	
-	
+	def bossEntry() =	{
+		
+	}
 	def failureMessage() =	{
 		println();
 		println("You have failed to defeat the evil Kan Krusher Kelman and save the kingdom from his evil.");
