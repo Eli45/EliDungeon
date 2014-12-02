@@ -6,6 +6,12 @@ move();
 bossEntry();
   Will be used to setup proper enemy variables for use against Boss. Also should include some dialogue.
   
+typeDamage();
+  Needs additions regarding all monster types.
+  
+dicerolls();
+  Needs to adjust percentage chance of a miss. It seems rather high at the moment.
+  
 Need to also add these feature :
 ------------------------------------------
 
