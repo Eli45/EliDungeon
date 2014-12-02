@@ -2,6 +2,7 @@ Modify :
 ------------------------------------------
 move();
   Need to include the if statements depending on what room you are in. Otherwise done.
+  Add to Explored Array. So that it tracks levels.
   
 bossEntry();
   Will be used to setup proper enemy variables for use against Boss. Also should include some dialogue.
