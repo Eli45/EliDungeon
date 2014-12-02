@@ -1,7 +1,7 @@
 /*
  * I lied about import not working. All we need to do is make sure the other folders are only 'object x {}' not 'object x extends App {}'
  */
-object Game extends App {
+object main extends App {
 	import publicVariables._, Entities._, Functions._
 	intro();
 	while (plyHP > 0 && curLvl != 10)	{
