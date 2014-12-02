@@ -5,7 +5,7 @@ object main extends App {
 	import publicVariables._, Entities._, Functions._
 	intro();
 	while (plyHP > 0 && curLvl != 10)	{
-		generateLevel();
+		generateLevel(curLvl);
 		printLevelInfo();
 		while (plyHP > 0 && enemyHP > 0)	{
 			combat();

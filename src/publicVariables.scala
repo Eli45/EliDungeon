@@ -12,8 +12,9 @@ object publicVariables	{
 	var plyHP = 100;
 	var wep = "";
 	var mMiss = 0.0;
+	var Explored = Array(0).drop(1)	//Will keep track of all the levels we have explored.
 	
-	def reset() =	{
+	def reset() =	{	//Needs to actually restart the game. As of current it only resets variables. Does not restart.
 		println();
 		println("Would you like to reset the game? Y/N.");
 		var r = readLine();

@@ -6,31 +6,31 @@ object Functions	{
 		println("You are a knight. Go kill stuff.")
 		println("Press enter to continue.")
 		readLine();
+		linksTo = Array("south","east","west");
 	}
-	def generateLevel(Level:Unit)	=	{
-		//Checks what rooms are connected to our current room.
-		linksTo = Array("north","south","east","west");
+	def generateLevel(Level:Int)	=	{
 		//if (curLvl == 1)	{linksTo = Array("east","west","south");}//add more
-		generateEnemies();
-		
-		def generateEnemies() =	{
-			var roomDifficulty = Math.round(Math.random()*3).toInt
-			queueEnemies(roomDifficulty)
-		}
-		
-		def queueEnemies(Difficulty:Int) =	{
-			var maxEnemies = Math.round(Math.random()*Difficulty).toInt
-			var monsterToQueue = "";
-			for (i <- 1 to maxEnemies)	{
-				var roll = Math.round(Math.random()*4);
-				if (roll == 0)	{roll = 1}
-				if (roll == 1)	{monsterToQueue = "Slime"}
-				else if (roll == 2)	{monsterToQueue = "Lizard"}
-				else if (roll == 3)	{monsterToQueue = "Drake"}
-				else if (roll == 4)	{monsterToQueue = "Matt"}
-				queue = queue :+ monsterToQueue
+		if (Explored.contains(curLvl))	{	}	//Does nothing if already explored.
+		else	{	//Otherwise enters combat and generates Enemies.
+			generateEnemies();
+			def generateEnemies() =	{
+				var roomDifficulty = Math.round(Math.random()*3).toInt
+				queueEnemies(roomDifficulty)
 			}
-			setupEnemy();
+			def queueEnemies(Difficulty:Int) =	{
+				var maxEnemies = Math.round(Math.random()*Difficulty).toInt
+				var monsterToQueue = "";
+				for (i <- 1 to maxEnemies)	{
+					var roll = Math.round(Math.random()*4);
+					if (roll == 0)	{roll = 1}
+					if (roll == 1)	{monsterToQueue = "Slime"}
+					else if (roll == 2)	{monsterToQueue = "Lizard"}
+					else if (roll == 3)	{monsterToQueue = "Drake"}
+					else if (roll == 4)	{monsterToQueue = "Matt"}
+					queue = queue :+ monsterToQueue
+				}
+				setupEnemy();
+			}
 		}
 	}
 	def setupEnemy() =	{
@@ -146,19 +146,49 @@ object Functions	{
 		println(s"You find a $potion HP potion that restores your hp to $plyHP.");
 	}
 	def move() =	{
-		println("What direction would you like to travel in?")
-		print("Your options include ")
-		for (i <- 0 to linksTo.length-1)	{
-			if (i != linksTo.length-1)	{
-				print(linksTo(i) +", ");
+		Explored = Explored :+ curLvl
+		var retry = true;
+		while (retry)	{
+			println("What direction would you like to travel in?")
+			print("Your options include ")
+			for (i <- 0 to linksTo.length-1)	{
+				if (i != linksTo.length-1)	{
+					print(linksTo(i) +", ");
+				}
+				else	{
+					print(linksTo(i)+".")
+				}
 			}
-			else	{
-				print(linksTo(i)+".")
+			var direction = readLine().toLowerCase;
+			println(direction)
+			levelDirection();
+			def levelDirection() =	{
+				if (linksTo.contains(direction))	{
+					if (direction == "north")	{ curLvl -= 3 }
+					else if (direction == "south")	{ curLvl += 3 }
+					else if (direction == "east")	{
+						if (curLvl == 1 || curLvl == 4 || curLvl == 7)	{ curLvl += 1 }
+						else	{ curLvl -= 2 }
+					}
+					else if (direction == "west")	{
+						if (curLvl == 2 || curLvl == 5 || curLvl == 8)	{ curLvl -= 1 }
+						else	{ curLvl += 2 }
+					}
+					retry = false;
+					println("You enter the "+direction+"ern room.")
+				}
+				else	{ retry = true; println(direction+" is not an available option.")}
 			}
+			updateLink();
+			def updateLink() =	{	//Checks what rooms are connected to our current room.
+				linksTo = Array("").drop(1)
+				if (curLvl != 9 && curLvl != 8)	{ linksTo = linksTo :+ "south" }
+				if (curLvl != 2 && curLvl != 5 && curLvl != 8)	{ linksTo = linksTo :+ "east" }
+				if (curLvl != 3 && curLvl != 6 && curLvl != 9)	{ linksTo = linksTo :+ "west" }
+				if (curLvl != 3 && curLvl != 1 && curLvl != 2)	{ linksTo = linksTo :+ "north" }
+			}
+			println()
 		}
-		var direction = readLine();
-		println("You enter the "+direction+"ern room.")
-		println()
 	}
 	
 	
