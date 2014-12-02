@@ -1,7 +1,7 @@
 Need to modify the following functions :
 ------------------------------------------
 
-attack();
+combat();
   Needs to repeat until queue.isEmpty.  /This is in Game.scala\
   Possible way to fix :
     while (queue.nonEmpty)  {
