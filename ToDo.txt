@@ -1,16 +1,23 @@
 Modify :
 ------------------------------------------
 bossEntry();
-  >Will be used to setup proper enemy variables for use against Boss. Also should include some dialogue.
+	>Will be used to setup proper enemy variables for use against Boss. Also should include some dialogue.
   
 typeDamage();
-  >Needs additions regarding all monster types.
+	>Needs additions regarding all monster types.
+	>Look into a more efficient way of doing what I've planned. Using if statements for each weapon and monster seems long and redundant.
   
 dicerolls();
-  >Needs to adjust percentage chance of a miss. It seems rather high at the moment.
+	>Needs to adjust percentage chance of a miss. It seems rather high at the moment.
   
 reset();
-  >Doesn't actually restart the game. Only resets variables. Need to fix it.
+	>Doesn't actually restart the game. Only resets variables. Need to fix it.
+  
+treasure();
+	>Add possibility to get nothing.
+	
+attack()/enemyAttack();
+	>Review values for a miss. They seem rather frequent and they aren't supposed to be that way.
   
 Need to also add these feature :
 ------------------------------------------
