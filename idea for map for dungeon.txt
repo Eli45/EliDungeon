@@ -1,3 +1,6 @@
+>>>	Review how this is set up in regards to if(Explored.contains(x));
+>>>	I do not believe they are in the correct order. Review journal for level map.
+
 I : unexplored
 X : explored
 N : inaccessible ? Maybe ?
