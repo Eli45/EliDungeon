@@ -18,6 +18,9 @@ treasure();
 	
 attack()/enemyAttack();
 	>Review values for a miss. They seem rather frequent and they aren't supposed to be that way.
+	
+generateLevel(Level:Int);
+	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
   
 Need to also add these feature :
 ------------------------------------------
