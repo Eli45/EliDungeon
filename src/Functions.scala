@@ -9,6 +9,7 @@ object Functions	{
 		linksTo = Array("south","east","west");
 	}
 	def generateLevel(Level:Int)	=	{
+		//if (curLvl == 1)	{linksTo = Array("east","west","south");}//add more
 		if (Explored.contains(curLvl))	{	}	//Does nothing if already explored.
 		else	{	//Otherwise enters combat and generates Enemies.
 			generateEnemies();
@@ -159,7 +160,6 @@ object Functions	{
 				}
 			}
 			var direction = readLine().toLowerCase;
-			println(direction)
 			levelDirection();
 			def levelDirection() =	{
 				if (linksTo.contains(direction))	{
