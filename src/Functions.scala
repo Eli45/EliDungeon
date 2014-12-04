@@ -3,7 +3,7 @@ object Functions	{
 	import Entities._
 	/* ---- LEVELS ---- */
 	def intro()	=	{
-		println("You are a knight. Go kill stuff.")
+		println("You are a knight. The evil Kan Krusher Kelman has taken power from the king.\nYou must defeat him at all costs.")
 		println("Press enter to continue.")
 		readLine();
 		linksTo = Array("south","east","west");
@@ -60,7 +60,7 @@ object Functions	{
 		}
 	}
 	/* ---- /LEVELS ---- */
-	
+
 	/* ---- COMBAT ---- */
 	def combat() =	{
 		while (queue.nonEmpty && plyHP > 0)	{
@@ -70,11 +70,14 @@ object Functions	{
 				var retry = true;
 				while (retry)	{
 					println();
-					println("What weapon would you like to use to attack?\nWeapons include: 'bow', 'longsword', 'shortsword'.");
+					println("What weapon would you like to use to attack?\nWeapons include: 'bow'(1), 'longsword'(2), 'shortsword'(3).");
 					wep = readLine().toLowerCase;
 					if (weapons.contains(wep))	{
 						wepDMG = weapons.apply(wep)
 						retry = false;
+						if (wep == "1")	{ wep = "bow"; }
+						else if (wep == "2")	{ wep = "longsword"; }
+						else if (wep == "3")	{ wep = "shortsword"; }
 					}
 					else { retry = true; println(wep+" is not a weapon.")}
 				}
@@ -107,7 +110,7 @@ object Functions	{
 						println(queue(0)+s"'s HP is now $enemyHP.")
 					}
 				}
-				if (enemyHP <= 0) { 
+				if (enemyHP <= 0) {
 					queue = queue.drop(1);
 					if (queue.nonEmpty)	{
 						setupEnemy();
@@ -117,14 +120,14 @@ object Functions	{
 				}
 				else { enemyAttack(); }
 				def enemyAttack() =	{
-					var roll = Math.round(Math.random()*mDAM)
-					var Missed = roll * mMiss	//Look at these values. They feel wrong.
-					if (Missed <= roll*.25)	{
+					var mDMG = Math.round(Math.random()*mDAM)
+					var roll = Math.random()
+					if (roll <= mMiss)	{
 						println("Enemy missed!")
 					}
 					else {
-						println(queue(0)+s" attacked you for $roll")
-						plyHP -= roll.toInt;
+						println(queue(0)+s" attacked you for $mDMG")
+						plyHP -= mDMG.toInt;
 						if (plyHP < 0)	{ plyHP = 0; }
 						println("Your HP is now "+plyHP)
 						println();
@@ -136,20 +139,25 @@ object Functions	{
 	def treasure() =	{
 		var x = Math.round(Math.random()*25);
 		var potion = 0;
-		if (x <= 7)	{potion = 15;}	//Add chance to get nothing.
-		else if (x > 7 && x <= 15)	{potion = 25;}
-		else if (x > 15 && x <= 23)	{potion = 35;}
-		else	{potion = 50;}
+		if (x <= 9)	{potion = 0;}	//Add chance to get nothing.
+		else if (x > 9 && x <= 19)	{potion = 15;}
+		else if (x > 19 && x <= 23)	{potion = 25;}
+		else	{potion = 35;}
 		plyHP += potion;
 		if (plyHP > 100)	{ plyHP = 100; }
-		println(s"You find a $potion HP potion that restores your hp to $plyHP.");
+		if (potion != 0)	{
+			println(s"You find a $potion HP keg that restores your hp to $plyHP.");
+		}
+		else	{
+			println("You found not treasure in the room.");
+		}
 	}
 	def move() =	{
-		Explored = Explored :+ curLvl
+		Explored = Explored :+ curLvl;
 		var retry = true;
 		while (retry)	{
-			println("What direction would you like to travel in?")
-			print("Your options include ")
+			println("What direction would you like to travel in?");
+			print("Your options include ");
 			for (i <- 0 to linksTo.length-1)	{
 				if (i != linksTo.length-1)	{
 					print(linksTo(i) +", ");
@@ -162,20 +170,29 @@ object Functions	{
 			levelDirection();
 			def levelDirection() =	{
 				if (linksTo.contains(direction))	{
-					if (direction == "north")	{ curLvl -= 3 }
-					else if (direction == "south")	{ curLvl += 3 }
+					if (direction == "north")	{ curLvl -= 3; }
+					else if (direction == "south")	{ curLvl += 3; }
 					else if (direction == "east")	{
-						if (curLvl == 1 || curLvl == 4 || curLvl == 7)	{ curLvl += 1 }
-						else	{ curLvl -= 2 }
+						if (curLvl == 1 || curLvl == 4 || curLvl == 7)	{ curLvl += 1; }
+						else	{ curLvl -= 2; }
 					}
 					else if (direction == "west")	{
-						if (curLvl == 2 || curLvl == 5 || curLvl == 8)	{ curLvl -= 1 }
-						else	{ curLvl += 2 }
+						if (curLvl == 2 || curLvl == 5 || curLvl == 8)	{ curLvl -= 1; }
+						else	{ curLvl += 2; }
 					}
 					retry = false;
-					println("You enter the "+direction+"ern room.")
+					var LevelEnv = "";
+					var roll = Math.round(Math.random()*6);
+					if (roll == 0)	{ LevelEnv = "dark"; }
+					else if (roll == 1)	{ LevelEnv = "dank"; }
+					else if (roll == 2)	{ LevelEnv = "murky"; }
+					else if (roll == 3)	{ LevelEnv = "damp"; }
+					else if (roll == 4)	{ LevelEnv = "smokey"; }
+					else if (roll == 5)	{ LevelEnv = "ruined"; }
+					else	{ LevelEnv = "stench-ridden"; }
+					println("You enter the "+LevelEnv+" "+direction+"ern room.");
 				}
-				else	{ retry = true; println(direction+" is not an available option.")}
+				else	{ retry = true; println(direction+" is not an available option."); }
 			}
 			updateLink();
 			def updateLink() =	{	//Checks what rooms are connected to our current room.
@@ -188,10 +205,12 @@ object Functions	{
 			println()
 		}
 	}
-	
-	
+
+
 	def bossEntry() =	{
-		
+		queue = Array("").drop(1); queue = queue :+ "King Kelman";
+		KingKelman;
+		println("You are now facing the evil King Kelman. Defeat him at all costs.");
 	}
 	def failureMessage() =	{
 		println();
