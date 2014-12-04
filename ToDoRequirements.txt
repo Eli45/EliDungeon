@@ -1,5 +1,0 @@
-> Ammunition for bow.
-> Add spells that require ammunition? (Optional)
-//> "You enter a _<<description room>>_."
-> Monsters more susceptible to certain weapons. (Already started but it's not completed.)
-> Finish boss battle.
