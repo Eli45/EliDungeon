@@ -18,7 +18,7 @@ generateLevel(Level:Int);
 	>Possibly via multiplying the level by some number and making that increase the chances of getting a tougher monster?
  
 move/treausre();
-	Is possible to repeatedly drop potions from already explored rooms.  Needs to be fixed.
+	>Is possible to repeatedly drop potions from already explored rooms.  Needs to be fixed.
   
 Need to also add these features :
 ------------------------------------------
