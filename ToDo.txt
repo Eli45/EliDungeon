@@ -2,19 +2,23 @@ Modify :
 ------------------------------------------
 bossEntry();
 	>OP boss.
-  
+	>Give supplies at the start of the room if the player is weak.
+	>Hopefully that will stop him being so OP
+
 typeDamage();
 	>Needs additions regarding all monster types.
 	>Look into a more efficient way of doing what I've planned. Using if statements for each weapon and monster seems long and redundant.
-  		
+	>This should help give other weapons a reason to be used over the longsword.
+	>Also possibly give different weapons different miss chance possibilities.
+
 generateLevel(Level:Int);
 	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
-  
+
 Need to also add these features :
 ------------------------------------------
 
 *Working on it ( A little bit. )
 Create a way to apply some sort of percentage decrease or increase of damage depending on what weapon you are using against certain enemies.
   tldr; enemies need strengths and weaknesses to certain attacks.
-  
+
   > Add different classes. Mage, Warrior, Archer etc etc..
