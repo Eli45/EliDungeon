@@ -3,9 +3,8 @@ object Functions	{
 	import Entities._
 	/* ---- LEVELS ---- */
 	def intro()	=	{
-		println("You are a knight. The evil Kan Krusher Kelman has taken power from the king.\nYou must defeat him at all costs.");
-		println("The only things you take with you are your longsword, shortsword, and bow.");
-		println("Press enter to continue.");
+		println("You are a knight. The evil Kan Krusher Kelman has taken power from the king.\nYou must defeat him at all costs.")
+		println("Press enter to continue.")
 		readLine();
 		linksTo = Array("south","east","west");
 	}
@@ -14,20 +13,20 @@ object Functions	{
 		else	{	//Otherwise enters combat and generates Enemies.
 			generateEnemies();
 			def generateEnemies() =	{
-				var roomDifficulty = Math.round(Math.random()*3).toInt;
-				queueEnemies(roomDifficulty);
+				var roomDifficulty = Math.round(Math.random()*3).toInt
+				queueEnemies(roomDifficulty)
 			}
 			def queueEnemies(Difficulty:Int) =	{
-				var maxEnemies = Math.round(Math.random()*Difficulty).toInt;
+				var maxEnemies = Math.round(Math.random()*Difficulty).toInt
 				var monsterToQueue = "";
 				for (i <- 1 to maxEnemies)	{
 					var roll = Math.round(Math.random()*4);
-					if (roll == 0)	{ roll = 1; }
-					if (roll == 1)	{ monsterToQueue = "Slime"; }
-					else if (roll == 2)	{ monsterToQueue = "Lizard"; }
-					else if (roll == 3)	{ monsterToQueue = "Drake"; }
-					else if (roll == 4)	{ monsterToQueue = "Matt"; }
-					queue = queue :+ monsterToQueue;
+					if (roll == 0)	{roll = 1}
+					if (roll == 1)	{monsterToQueue = "Slime"}
+					else if (roll == 2)	{monsterToQueue = "Lizard"}
+					else if (roll == 3)	{monsterToQueue = "Drake"}
+					else if (roll == 4)	{monsterToQueue = "Matt"}
+					queue = queue :+ monsterToQueue
 				}
 				setupEnemy();
 			}
@@ -36,23 +35,23 @@ object Functions	{
 	def setupEnemy() =	{
 	  	//Sets up our monster variables correctly based on the current opponent.
 		if (queue.nonEmpty)	{
-			if (queue(0) == "Slime")	{ Slime; }
-			else if (queue(0) == "Lizard")	{ Lizard; }
-			else if (queue(0) == "Drake")	{ Drake; }
-			else	{ Matt; }
+			if (queue(0) == "Slime")	{Slime;}
+			else if (queue(0) == "Lizard")	{Lizard;}
+			else if (queue(0) == "Drake")	{Drake;}
+			else	{Matt;}
 		}
 	}
 	def printLevelInfo() =	{
 		if (queue.nonEmpty)	{
-			println("Monsters in this room.\n------------------");
+			println("Monsters in this room.\n------------------")
 			for (i <- 0 to queue.length-1)	{
 				if (i != queue.length-1)	{
 					print(queue(i)+", ");
 				}
 				else	{
-					print(queue(i)+ ".");
+					print(queue(i)+ ".")
 				}
-				println();
+				println()
 			}
 			println("You will be facing "+queue(0)+" first.");
 		}
@@ -65,56 +64,50 @@ object Functions	{
 	/* ---- COMBAT ---- */
 	def combat() =	{
 		while (queue.nonEmpty && plyHP > 0)	{
-			if (plyHP < 50 && boss == true)	{
-				var roll = Math.round(Math.random()*100)
-				if (roll <= 20)	{
-					println("In the midst of the combat you find a half drunken keg dropped by Kelman.");
-					plyHP += 15;
-					println("HP restored by 15 to "+plyHP);
-				}
-			}
 			chooseWeapon();
 			def chooseWeapon() =	{
 				var wepDMG = 0;
-				var missChance = 0;
-				var minDMG = 0;
 				var retry = true;
 				while (retry)	{
 					println();
-					println("What weapon would you like to use to attack?\nWeapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3).");
+					println("What weapon would you like to use to attack?\nWeapons include: 'bow'(1), 'longsword'(2), 'shortsword'(3).");
 					wep = readLine().toLowerCase;
 					if (weapons.contains(wep))	{
-						wepDMG = weapons.apply(wep);
+						wepDMG = weapons.apply(wep)
 						retry = false;
-						if (wep == "1")	{ wep = "longsword"; }
-						else if (wep == "2")	{ wep = "shortsword"; }
-						else if (wep == "3")	{ wep = "bow"; }
-						missChance = missChances.apply(wep);
-						minDMG = minVal.apply(wep);
+						if (wep == "1")	{ wep = "bow"; }
+						else if (wep == "2")	{ wep = "longsword"; }
+						else if (wep == "3")	{ wep = "shortsword"; }
 					}
-					else { retry = true; println(wep+" is not a weapon."); }
+					else { retry = true; println(wep+" is not a weapon.")}
 				}
 				dicerolls();
 				def dicerolls() =	{
-					var roll = Math.round(Math.random()*(wepDMG+6));
-					if (roll < minDMG)	{ roll = minDMG; }
-					else if (roll > wepDMG)	{ roll = wepDMG; }
-					var missedOrNo = Math.round(Math.random()*100);
-					if (missedOrNo <= missChance)	{ println("Your attack missed!"); }
+					var roll = Math.round(Math.random()*wepDMG)
+					if (wep != "bow" && roll < 4)	{ println("Your attack missed!") }
+					else if (wep == "bow" && roll < 2)	{ println("Your attack missed!") }
 					else	{
-						var newRoll = roll.toDouble;
+						var newRoll = roll.toDouble
 						def typeDamage() =	{
-							//Specific type damages against certain monsters.
-							var dmgs = 0.0;
-							if (wep == "longsword")	{ dmgs = LSdmgs.apply(queue(0)) * newRoll; }
-							else if (wep == "shortsword")	{ dmgs = SSdmgs.apply(queue(0)) * newRoll; }
-							else	{ BOWdmgs.apply(queue(0)) * newRoll; }
+							//This is really inefficient, possibly look into a better way.
+							if (queue(0) == "Slime")	{
+								if (wep == "bow")	{ newRoll = newRoll * .85 }
+								else if (wep == "longsword")	{ newRoll = newRoll * 1.25 }
+								else	{ newRoll = newRoll * 1 }
+							}
+							else if (queue(0) == "Lizard")	{
+								if (wep == "bow")	{  }
+								else if (wep == "longsword")	{  }
+								else	{  }
+							}
+							else if (queue(0) == "Drake")	{}
+							else if (queue(0) == "Matt")	{}
 						}
-						var finalDAM = newRoll.toInt;
-						println("You attacked "+queue(0)+ s" with $wep for $finalDAM.");
+						var finalDAM = newRoll.toInt
+						println("You attacked "+queue(0)+ s" with $wep for $finalDAM.")
 						enemyHP -= finalDAM;
 						if (enemyHP <= 0) { enemyHP = 0; }
-						println(queue(0)+s"'s HP is now $enemyHP.");
+						println(queue(0)+s"'s HP is now $enemyHP.")
 					}
 				}
 				if (enemyHP <= 0) {
@@ -127,16 +120,16 @@ object Functions	{
 				}
 				else { enemyAttack(); }
 				def enemyAttack() =	{
-					var mDMG = Math.round(Math.random()*mDAM);
-					var roll = Math.random();
+					var mDMG = Math.round(Math.random()*mDAM)
+					var roll = Math.random()
 					if (roll <= mMiss)	{
-						println("Enemy missed!");
+						println("Enemy missed!")
 					}
 					else {
-						println(queue(0)+s" attacked you for $mDMG");
+						println(queue(0)+s" attacked you for $mDMG")
 						plyHP -= mDMG.toInt;
 						if (plyHP < 0)	{ plyHP = 0; }
-						println("Your HP is now "+plyHP);
+						println("Your HP is now "+plyHP)
 						println();
 					}
 				}
@@ -144,24 +137,19 @@ object Functions	{
 		}
 	}
 	def treasure() =	{
-		if (Explored.contains(curLvl))	{
-			println("You have already looted this room!")
+		var x = Math.round(Math.random()*25);
+		var potion = 0;
+		if (x <= 9)	{potion = 0;}	//Add chance to get nothing.
+		else if (x > 9 && x <= 19)	{potion = 15;}
+		else if (x > 19 && x <= 23)	{potion = 25;}
+		else	{potion = 35;}
+		plyHP += potion;
+		if (plyHP > 100)	{ plyHP = 100; }
+		if (potion != 0)	{
+			println(s"You find a $potion HP keg that restores your hp to $plyHP.");
 		}
 		else	{
-			var x = Math.round(Math.random()*25);
-			var potion = 0;
-			if (x <= 9)	{potion = 0;}	//Add chance to get nothing.
-			else if (x > 9 && x <= 19)	{potion = 15;}
-			else if (x > 19 && x <= 23)	{potion = 25;}
-			else	{potion = 35;}
-			plyHP += potion;
-			if (plyHP > 100)	{ plyHP = 100; }
-			if (potion != 0)	{
-				println(s"You find a $potion HP keg that restores your hp to $plyHP.");
-			}
-			else	{
-				println("You found not treasure in the room.");
-			}
+			println("You found not treasure in the room.");
 		}
 	}
 	def move() =	{
@@ -175,7 +163,7 @@ object Functions	{
 					print(linksTo(i) +", ");
 				}
 				else	{
-					print(linksTo(i)+".");
+					print(linksTo(i)+".")
 				}
 			}
 			println();
@@ -218,39 +206,40 @@ object Functions	{
 			updateLink();
 			def updateLink() =	{	//Checks what rooms are connected to our current room.
 				linksTo = Array("").drop(1)
-				if (curLvl != 9 && curLvl != 8)	{ linksTo = linksTo :+ "south"; }
-				if (curLvl != 2 && curLvl != 5 && curLvl != 8)	{ linksTo = linksTo :+ "east"; }
-				if (curLvl != 3 && curLvl != 6 && curLvl != 9)	{ linksTo = linksTo :+ "west"; }
-				if (curLvl != 3 && curLvl != 1 && curLvl != 2)	{ linksTo = linksTo :+ "north"; }
+				if (curLvl != 9 && curLvl != 8)	{ linksTo = linksTo :+ "south" }
+				if (curLvl != 2 && curLvl != 5 && curLvl != 8)	{ linksTo = linksTo :+ "east" }
+				if (curLvl != 3 && curLvl != 6 && curLvl != 9)	{ linksTo = linksTo :+ "west" }
+				if (curLvl != 3 && curLvl != 1 && curLvl != 2)	{ linksTo = linksTo :+ "north" }
 			}
-			println();
+			println()
 		}
 	}
 	def makeMap() =	{
 		def explore(x:Int) =	{
 			if (x == curLvl)	{
-				if (x == 3 || x  == 6  || x == 9)	{ print("|"); }
+				if (x == 3 || x  == 6  || x == 9)	{ print("|") }
 				print ("P");
-				if (x == 2 || x == 5 || x == 8)	{ print("|"); }
+				if (x == 2 || x == 5 || x == 8)	{ print("|") }
 			}
 			else if (x != 10)	{
 				if (Explored.contains(x))	{ 
-				  if (x == 3 || x  == 6  || x == 9)	{ print("|"); }
-				  print("X");
-				  if (x == 2 || x == 5 || x == 8)	{ print("|"); }
+				  if (x == 3 || x  == 6  || x == 9)	{ print("|") }
+				  print("X")
+				  if (x == 2 || x == 5 || x == 8)	{ print("|") }
 				}
 				else	{ 
-					if (x == 3 || x  == 6  || x == 9)	{ print(" "); }
-					if (x == 2 || x == 5 || x == 8)	{ print(" "); }
+					if (x == 3 || x  == 6  || x == 9)	{ print(" ") }
+					if (x == 2 || x == 5 || x == 8)	{ print(" ") }
 					print(" "); 
 				}
 			}
 			else	{
 				if(Explored.contains(x))	{ print("  ");print("|X|");}
+				else	{}
 			}
 			print(" ");
 		}
-		//Loops would be difficult to implement here due to patterns so I won't.
+		//Loop would be difficult to implement here due to patterns so I won't.
 
 		explore(3); explore(1); explore(2);
 		println();
