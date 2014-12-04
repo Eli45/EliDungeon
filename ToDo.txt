@@ -14,12 +14,13 @@ typeDamage();
 generateLevel(Level:Int);
 	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
 	>Possibly via multiplying the level by some number and making that increase the chances of getting a tougher monster?
+ 
+move/treausre();
+	Is possible to repeatedly drop potions from already explored rooms.  Needs to be fixed.
   
 Need to also add these features :
 ------------------------------------------
 
-*Working on it ( A little bit. )
-Create a way to apply some sort of percentage decrease or increase of damage depending on what weapon you are using against certain enemies.
-  tldr; enemies need strengths and weaknesses to certain attacks.
-  
-  > Add different classes. Mage, Warrior, Archer etc etc..
+  	> Add different classes. Mage, Warrior, Archer etc etc..
+	> Ammunition for bow.
+	> Add spells that require ammunition? (Optional)
