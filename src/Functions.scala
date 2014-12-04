@@ -166,10 +166,19 @@ object Functions	{
 					print(linksTo(i)+".")
 				}
 			}
+			println();
+			println("Or alternatively type 'map' to see a map of the currently explored areas or 'legend' to see map legend.");
 			var direction = readLine().toLowerCase;
 			levelDirection();
 			def levelDirection() =	{
-				if (linksTo.contains(direction))	{
+				if (direction.equalsIgnoreCase("map"))	{
+					makeMap();
+					retry = true;
+				}
+				else if (direction.equalsIgnoreCase("legend"))	{
+					println("'X' = Explored. 'P' = Player");
+				}
+				else if (linksTo.contains(direction))	{
 					if (direction == "north")	{ curLvl -= 3; }
 					else if (direction == "south")	{ curLvl += 3; }
 					else if (direction == "east")	{
@@ -205,8 +214,49 @@ object Functions	{
 			println()
 		}
 	}
+	def makeMap() =	{
+		def explore(x:Int) =	{
+			if (x == curLvl)	{
+				if (x == 3 || x  == 6  || x == 9)	{ print("|") }
+				print ("P");
+				if (x == 2 || x == 5 || x == 8)	{ print("|") }
+			}
+			else if (x != 10)	{
+				if (Explored.contains(x))	{ 
+				  if (x == 3 || x  == 6  || x == 9)	{ print("|") }
+				  print("X")
+				  if (x == 2 || x == 5 || x == 8)	{ print("|") }
+				}
+				else	{ 
+					if (x == 3 || x  == 6  || x == 9)	{ print(" ") }
+					if (x == 2 || x == 5 || x == 8)	{ print(" ") }
+					print(" "); 
+				}
+			}
+			else	{
+				if(Explored.contains(x))	{ print("  ");print("|X|");}
+				else	{}
+			}
+			print(" ");
+		}
+		//Loop would be difficult to implement here due to patterns so I won't.
 
-
+		explore(3); explore(1); explore(2);
+		println();
+		explore(6); explore(4); explore(5);
+		println(); 
+		explore(9); explore(7); explore(8);
+		println();
+		explore(10)
+		/* if all levels explored and player is located at 4 then should result in an output of:
+		 *  _____
+		 * |X X X|
+		 * |X P X|
+		 * |X X X|
+		 *   |X|
+		 * otherwise, unexplored levels are simply displayed as blank spaces.
+		 */
+	}
 	def bossEntry() =	{
 		queue = Array("").drop(1); queue = queue :+ "King Kelman";
 		KingKelman;

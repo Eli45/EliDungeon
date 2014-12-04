@@ -1,4 +1,5 @@
 object main extends App {
+	//Ask Kelman about makeMap(); function regarding bottom walls.
 	import publicVariables._, Entities._, Functions._
 	while (play)	{
 		intro();
