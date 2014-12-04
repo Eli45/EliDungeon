@@ -3,26 +3,21 @@ UPDATE COMMENTS
 Modify :
 ------------------------------------------
 bossEntry();
-	>OP boss.
-	>Give supplies at the start of the room if the player is weak.
-	>Hopefully that will stop him being so OP
-
-typeDamage();
-	>Needs additions regarding all monster types.
-	>Look into a more efficient way of doing what I've planned. Using if statements for each weapon and monster seems long and redundant.
-	>This should help give other weapons a reason to be used over the longsword.
-	>Also possibly give different weapons different miss chance possibilities.
+	>Give supplies at the start of the room if the player is weak. (May still be needed after latest update. Supply during battle is given however.)
+	
+queueEnemies();
+	>Change percentage chance based on level number or in general more advanced. (See generatesLevel(); note)
 
 generateLevel(Level:Int);
 	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
 	>Possibly via multiplying the level by some number and making that increase the chances of getting a tougher monster?
- 
-move/treausre();
-	>Is possible to repeatedly drop potions from already explored rooms.  Needs to be fixed.
   
 Need to also add these features :
 ------------------------------------------
 
-  	> Add different classes. Mage, Warrior, Archer etc etc..
-	> Ammunition for bow.
-	> Add spells that require ammunition? (Optional)
+	> [IMPORTANT] Need to have a way to keep level environments consistent no matter how many times you enter a room.
+		>Possibly via a 10 length array that keeps track of it.
+		>Can be updated via : arrayName(curLvl) = LevelEnv;
+	> [REQUIRED] Ammunition for bow.
+  	> [Very Optional] Add different classes. Mage, Warrior, Archer etc etc..
+	> [Very Optional] Add spells that require ammunition?
