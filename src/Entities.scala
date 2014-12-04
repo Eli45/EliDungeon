@@ -21,12 +21,12 @@ object Entities	{
 	def Drake =	{
 		enemyHP = 35;
 		mDAM = 17;
-		mMiss = 0.35
+		mMiss = 0.35;
 	}
 	def Matt =	{
 		enemyHP = 50;
 		mDAM = 13;
-		mMiss = 0.4
+		mMiss = 0.4;
 	}
 	/* ---- /HIGH LEVEL ---- */
 	
@@ -34,8 +34,8 @@ object Entities	{
 	def KingKelman =	{
 		enemyHP = 100;
 		mDAM = 15;
-		mMiss = 0.07
+		mMiss = 0.07;
+		boss = true;
 	}
 	/* ---- /BOSS ---- */
-
 }
