@@ -2,6 +2,7 @@ EliDungeon
 ==========
 
 #Story
+==========
 Kan/Keg Krusher Kelman has usurped power from the standing King. 
 You, a lowly knight must venture in the depths of his cavern where he now rules the kingdom from.
 If you do not succeed the kingdom is surely doomed to a thousand years of darkness.
