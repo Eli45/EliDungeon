@@ -7,7 +7,7 @@ object Functions	{
 		println("What are you known as fair soldier?");
 		name = readLine();
 		while (retry)	{
-			println("Would you like to be an archer, knight, or assassin.");
+			println("Were you known to be an archer, knight, or assassin before this unfortunate turn of events.");
 			Class = readLine();
 			if (Class.equalsIgnoreCase("archer"))	{ retry = false; ClassBonus("archer"); }
 			else if (Class.equalsIgnoreCase("knight"))	{ retry = false; ClassBonus("knight"); }
@@ -61,8 +61,8 @@ object Functions	{
 				}
 			}
 		}
-		println("You are a "+Class+". The evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
-		println("The only things you take with you are your longsword, shortsword, and bow.");
+		println("Then so it was my noble "+Class+". The evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
+		println("The only things you take with you into the dark are your longsword, shortsword, and bow.");
 		println("Press enter to venture into the basement.");
 		readLine();
 		linksTo = Array("south","east","west");
@@ -79,12 +79,11 @@ object Functions	{
 				var maxEnemies = Math.round(Math.random()*Difficulty).toInt;
 				var monsterToQueue = "";
 				for (i <- 1 to maxEnemies)	{
-					var roll = Math.round(Math.random()*4);
-					if (roll == 0)	{ roll = 1; }
-					if (roll == 1)	{ monsterToQueue = "Slime"; }
-					else if (roll == 2)	{ monsterToQueue = "Lizard"; }
-					else if (roll == 3)	{ monsterToQueue = "Drake"; }
-					else if (roll == 4)	{ monsterToQueue = "Matt"; }
+					var roll = Math.round(Math.random()*100);
+					if (roll <= 45)	{ monsterToQueue = "Slime"; }
+					else if (roll <= 75 && roll > 45)	{ monsterToQueue = "Lizard"; }
+					else if (roll <= 85 && roll > 75)	{ monsterToQueue = "Drake"; }
+					else if (roll <= 100 && roll > 85)	{ monsterToQueue = "Matt"; }
 					queue = queue :+ monsterToQueue;
 				}
 				setupEnemy();
@@ -115,7 +114,7 @@ object Functions	{
 			println("You will be facing "+queue(0)+" first.");
 		}
 		else	{
-			println("There is nothing in the room.");
+			println("There are no monsters in the room.");
 		}
 	}
 	/* ---- /LEVELS ---- */
@@ -137,20 +136,27 @@ object Functions	{
 				var missChance = 0;
 				var minDMG = 0;
 				var retry = true;
+				if (ammo < 0)	{ ammo = 0; }
 				while (retry)	{
 					println();
-					println("What weapon would you like to use to attack?\nWeapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3).");
+					println("What weapon would you like to use to attack?\nWeapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)["+ammo+"].");
 					wep = readLine().toLowerCase;
 					if (weapons.contains(wep))	{
 						wepDMG = weapons.apply(wep);
-						retry = false;
 						if (wep == "1")	{ wep = "longsword"; }
 						else if (wep == "2")	{ wep = "shortsword"; }
 						else if (wep == "3")	{ wep = "bow"; }
-						missChance = missChances.apply(wep);
-						minDMG = minVal.apply(wep);
+						if (wep == "bow" && ammo <= 0)	{
+							println(wep.capitalize+" has no ammo!");
+							retry = true;
+						}
+						else	{
+							missChance = missChances.apply(wep);
+							minDMG = minVal.apply(wep);
+							retry = false;
+						}
 					}
-					else { retry = true; println(wep+" is not a weapon."); }
+					else { retry = true; println(wep.capitalize+" is not a weapon."); }
 				}
 				dicerolls();
 				def dicerolls() =	{
@@ -170,6 +176,7 @@ object Functions	{
 						}
 						var finalDAM = newRoll.toInt;
 						println("You attacked "+queue(0)+ s" with $wep for $finalDAM.");
+						if (wep == "bow")	{ ammo -= 1; }
 						enemyHP -= finalDAM;
 						if (enemyHP <= 0) { enemyHP = 0; }
 						println(queue(0)+s"'s HP is now $enemyHP.");
@@ -218,7 +225,16 @@ object Functions	{
 				println(s"You find a $potion HP keg that restores your hp to $plyHP.");
 			}
 			else	{
-				println("You found no treasure in the room.");
+				println("You found no HP kegs in the room.");
+			}
+			if (ammo < 5)	{
+				var bows = Math.round(Math.random()*4);
+				if (bows != 0)	{
+					println("You found "+bows+" bows in the room.");
+				}
+				else	{
+					println("You found no bows in the room.")
+				}
 			}
 		}
 	}
@@ -332,7 +348,7 @@ object Functions	{
 		println("You have entered the final room of Kelman's basement.");
 		println("You can smell the gut-wrenching reek of doritos and mountain dew in the air.");
 		plyHP -= 15;
-		println("Unfortunately, you drink some by accident. It reduces your hp by 15 to "+plyHP);
+		println("Unfortunately, you drink some mountain dew by accident. It reduces your hp by 15 to "+plyHP);
 		if (plyHP > 0)	{
 			println("You are now facing the evil King Kelman. Defeat him at all costs.");
 		}

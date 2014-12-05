@@ -4,7 +4,7 @@ object publicVariables	{
 	var linksTo = Array("").drop(1)	//Array for the 4 possible directions.
 	var Class = "";
 	var name = "";
-	
+	var ammo = 10;
 	//For max dmg.
 	var weapons = Map(
 		"longsword" -> 13,
@@ -33,8 +33,6 @@ object publicVariables	{
 		"Drake" -> 1,
 		"Matt" -> 1.25,
 		"King Kelman" -> 1.3
-	
-	
 	);
 	val SSdmgs = Map[String,Double](
 		"Slime" -> 1.3,
