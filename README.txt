@@ -10,5 +10,9 @@ If you do not succeed the kingdom is surely doomed to a thousand years of darkne
 #Description
 ==========
 Dungeon Adventure Game by Eli Furland created for Kan Krusher Kelman's class.
-Basic program, has potential for addition.
+Very basic text-based program.
 Have fun, hopefully it was worth the weight.
+
+#Instructions
+==========
+Follow the on screen instructions. It should fairly straight forward. Your goal is to get to Kelman's room and defeat him.
