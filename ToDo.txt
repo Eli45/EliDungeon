@@ -3,13 +3,11 @@ UPDATE COMMENTS
 Modify :
 ------------------------------------------
 Entities.scala
-	>Probably need to modify what mMiss is and or how it is determined in Functions.scala
-	
-bossEntry();
-	>Give supplies at the start of the room if the player is weak. (May still be needed after latest update. Supply during battle is given however.)
+	>Add mid-level monsters.
 	
 queueEnemies();
 	>Change percentage chance based on level number or in general more advanced. (See generatesLevel(); note)
+	>Right now it also seems weak and sometimes barely any monsters spawn. Must be more.
 
 generateLevel(Level:Int);
 	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
@@ -22,5 +20,4 @@ Need to also add these features :
 		>Possibly via a 10 length array that keeps track of it.
 		>Can be updated via : arrayName(curLvl) = LevelEnv;
 	> [REQUIRED] Ammunition for bow.
-  	> [Very Optional] Add different classes. Mage, Warrior, Archer etc etc..
 	> [Very Optional] Add spells that require ammunition?
