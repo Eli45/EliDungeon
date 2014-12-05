@@ -2,6 +2,9 @@ UPDATE COMMENTS
 
 Modify :
 ------------------------------------------
+Entities.scala
+	>Probably need to modify what mMiss is and or how it is determined in Functions.scala
+	
 bossEntry();
 	>Give supplies at the start of the room if the player is weak. (May still be needed after latest update. Supply during battle is given however.)
 	
