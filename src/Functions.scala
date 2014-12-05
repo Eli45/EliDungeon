@@ -3,9 +3,67 @@ object Functions	{
 	import Entities._
 	/* ---- LEVELS ---- */
 	def intro()	=	{
-		println("You are a knight. The evil Kan Krusher Kelman has taken power from the king.\nYou must defeat him at all costs.");
+		var retry = true;
+		println("What are you known as fair soldier?");
+		name = readLine();
+		while (retry)	{
+			println("Would you like to be an archer, knight, or assassin.");
+			Class = readLine();
+			if (Class.equalsIgnoreCase("archer"))	{ retry = false; ClassBonus("archer"); }
+			else if (Class.equalsIgnoreCase("knight"))	{ retry = false; ClassBonus("knight"); }
+			else if (Class.equalsIgnoreCase("assassin"))	{ retry = false; ClassBonus("assassin") }
+			else	{ retry = true; println(Class+" is not a class."); }
+			def ClassBonus(Class:String) =	{	//Sets damages for different classes.
+				if (Class == "archer")	{
+					weapons = Map(
+						"longsword" -> 6,
+						"shortsword" -> 8,
+						"bow" -> 11,
+						"1" -> 6,
+						"2" -> 8,
+						"3" -> 11
+					);
+					minVal = Map(
+						"longsword" -> 1,
+						"shortsword" -> 5,
+						"bow" -> 6
+					);
+				}
+				else if (Class == "knight")	{
+					weapons = Map(
+						"longsword" -> 17,
+						"shortsword" -> 6,
+						"bow" -> 4,
+						"1" -> 17,
+						"2" -> 6,
+						"3" -> 4
+					);
+					minVal = Map(
+						"longsword" -> 10,
+						"shortsword" -> 3,
+						"bow" -> 1
+					);
+				}
+				else	{
+					weapons = Map(
+						"longsword" -> 10,
+						"shortsword" -> 11,
+						"bow" -> 6,
+						"1" -> 10,
+						"2" ->11,
+						"3" -> 6
+					);
+					minVal = Map(
+						"longsword" -> 5,
+						"shortsword" -> 8,
+						"bow" -> 4
+					);
+				}
+			}
+		}
+		println("You are a "+Class+". The evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
 		println("The only things you take with you are your longsword, shortsword, and bow.");
-		println("Press enter to continue.");
+		println("Press enter to enter the basement.");
 		readLine();
 		linksTo = Array("south","east","west");
 	}
@@ -47,10 +105,10 @@ object Functions	{
 			println("Monsters in this room.\n------------------");
 			for (i <- 0 to queue.length-1)	{
 				if (i != queue.length-1)	{
-					print(queue(i)+", ");
+					print((i+1)+". "+queue(i)+", ");
 				}
 				else	{
-					print(queue(i)+ ".");
+					print((i+1)+". "+queue(i)+ ".");
 				}
 				println();
 			}
@@ -128,7 +186,7 @@ object Functions	{
 				else { enemyAttack(); }
 				def enemyAttack() =	{
 					var mDMG = Math.round(Math.random()*mDAM);
-					var roll = Math.random();
+					var roll = Math.round(Math.random()*100);
 					if (roll <= mMiss)	{
 						println("Enemy missed!");
 					}
@@ -150,7 +208,7 @@ object Functions	{
 		else	{
 			var x = Math.round(Math.random()*25);
 			var potion = 0;
-			if (x <= 9)	{potion = 0;}	//Add chance to get nothing.
+			if (x <= 9)	{potion = 0;}
 			else if (x > 9 && x <= 19)	{potion = 15;}
 			else if (x > 19 && x <= 23)	{potion = 25;}
 			else	{potion = 35;}
@@ -160,7 +218,7 @@ object Functions	{
 				println(s"You find a $potion HP keg that restores your hp to $plyHP.");
 			}
 			else	{
-				println("You found not treasure in the room.");
+				println("You found no treasure in the room.");
 			}
 		}
 	}
@@ -271,18 +329,24 @@ object Functions	{
 	def bossEntry() =	{
 		queue = Array("").drop(1); queue = queue :+ "King Kelman";
 		KingKelman;
-		println("You are now facing the evil King Kelman. Defeat him at all costs.");
+		println("You have entered the final room of Kelman's basement.");
+		println("You can smell the gut-wrenching reek of doritos and mountain dew in the air.");
+		plyHP -= 15;
+		println("Unfortunately, you drink some by accident. It reduces your hp by 15 to "+plyHP);
+		if (plyHP > 0)	{
+			println("You are now facing the evil King Kelman. Defeat him at all costs.");
+		}
 	}
 	def failureMessage() =	{
 		println();
-		println("You have failed to defeat the evil Kan Krusher Kelman and save the kingdom from his evil.");
-		println("Inevitably, without your assistance, the kingdom fell to his influence and all was lost.");
+		println("You have failed to defeat the evil Kan Krusher Kelman and save the kingdom of 4chan from his evil.");
+		println("Inevitably, without your assistance, the kingdom totally fell to his influence and all was lost.");
 		println("---- GAME OVER ----");
 	}
 	def gameSuccess() =	{
 		println();
 		println("You have defeated the evil Kan Krusher Kelman and saved the kingdom from his evil.");
-		println("Upon your return you are granted command of the throne.\nNow it is your turn to lead the kingdom to glory.");
+		println("Upon your return you, "+name+", are granted command of 4chan.\nNow it is your turn to lead the kingdom to glory.");
 		println("---- GAME OVER ----");
 	}
 }

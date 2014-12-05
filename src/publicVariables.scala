@@ -2,8 +2,11 @@ object publicVariables	{
 	var play = true;
 	var mDAM = 0;
 	var linksTo = Array("").drop(1)	//Array for the 4 possible directions.
+	var Class = "";
+	var name = "";
+	
 	//For max dmg.
-	val weapons = Map(
+	var weapons = Map(
 		"longsword" -> 13,
 		"shortsword" -> 8,
 		"bow" -> 6,
@@ -12,7 +15,7 @@ object publicVariables	{
 		"3" -> 6
 	);
 	//Min dmg.
-	val minVal = Map(
+	var minVal = Map(
 	    "longsword" -> 7,
 	    "shortsword" -> 5,
 	    "bow" -> 4
@@ -65,7 +68,7 @@ object publicVariables	{
 			play = true;
 			enemyHP = 0;
 			mDAM = 0;
-			linksTo = Array("").drop(1);	//Array for the 4 possible directions.
+			linksTo = Array("").drop(1);
 			curLvl = 1;
 			queue = Array("").drop(1);
 			enemyHP = 0;
