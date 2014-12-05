@@ -13,6 +13,8 @@ Dungeon Adventure Game by Eli Furland created for Kan Krusher Kelman's class.
 Very basic text-based program.
 Have fun, hopefully it was worth the weight.
 
-#Instructions
+#Instructions/Guide
 ==========
 Follow the on screen instructions. It should fairly straight forward. Your goal is to get to Kelman's room and defeat him.
+Hotkeys to the right of the listed weapon can be typed into the console for quick attacking. Looks like: 'name'(x).
+Ammo for weapons that require it is listed as [x], to the right of the hotkey.
