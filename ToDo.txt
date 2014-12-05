@@ -4,14 +4,13 @@ Modify :
 ------------------------------------------
 Entities.scala
 	>Add mid-level monsters.
-	
-queueEnemies();
-	>Change percentage chance based on level number or in general more advanced. (See generatesLevel(); note)
-	>Right now it also seems weak and sometimes barely any monsters spawn. Must be more.
+	>Be sure to update the specific type damages to correspond with this change.
 
+/*
 generateLevel(Level:Int);
 	>Make the parameter actually do something. As of right now it does nothing and is a pointless addition.
 	>Possibly via multiplying the level by some number and making that increase the chances of getting a tougher monster?
+*/ Decided against this. Random is better in my opinion.
   
 Need to also add these features :
 ------------------------------------------
@@ -19,5 +18,6 @@ Need to also add these features :
 	> [IMPORTANT] Need to have a way to keep level environments consistent no matter how many times you enter a room.
 		>Possibly via a 10 length array that keeps track of it.
 		>Can be updated via : arrayName(curLvl) = LevelEnv;
-	> [REQUIRED] Ammunition for bow.
+		>if (arrayName(curLvl).exists) { println("You enter the "+arrayName(curLvl)+ "+direction+" room.");
+		>else { normal operations and add level desc to array. }
 	> [Very Optional] Add spells that require ammunition?
