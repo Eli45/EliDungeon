@@ -63,7 +63,7 @@ object Functions	{
 		}
 		println("You are a "+Class+". The evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
 		println("The only things you take with you are your longsword, shortsword, and bow.");
-		println("Press enter to enter the basement.");
+		println("Press enter to venture into the basement.");
 		readLine();
 		linksTo = Array("south","east","west");
 	}
