@@ -12,11 +12,15 @@ object Entities	{
 		mMiss = 10;
 	}
 	/* ---- /LOW LEVEL ---- */
-	
+
 	/* ---- MID LEVEL ---- */
-		//Add a mid level monster?
+	def LeanMachine =	{
+			enemyHP = 15;
+			mDAM = 23;
+			mMiss = 20;
+	}
 	/* ---- /MID LEVEL ---- */
-	
+
 	/* ---- HIGH LEVEL ---- */
 	def Drake =	{
 		enemyHP = 35;
@@ -29,7 +33,7 @@ object Entities	{
 		mMiss = 40;
 	}
 	/* ---- /HIGH LEVEL ---- */
-	
+
 	/* ---- BOSS ---- */
 	def KingKelman =	{
 		enemyHP = 100;

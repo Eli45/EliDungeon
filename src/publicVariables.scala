@@ -1,7 +1,9 @@
 object publicVariables	{
 	var play = true;
 	var mDAM = 0;
-	var linksTo = Array("").drop(1)	//Array for the 4 possible directions.
+	var linksTo = Array("").drop(1);	//Array for the 4 possible directions.
+	var prevEnv = Array("","dark","","","","","","","","",""); //Array for previous lvlenv. //1st lvl always dark.
+					//	^This element is used as a placeholder.
 	var Class = "";
 	var name = "";
 	var ammo = 10;
@@ -46,7 +48,7 @@ object publicVariables	{
 		"Lizard" -> 1.5,
 		"Drake" -> 1,
 		"Matt" -> 0.45,
-		"King Kelman" -> 1.25   
+		"King Kelman" -> 1.25
 	);
 	//end Specific monster damages.
 	var curLvl = 1;

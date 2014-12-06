@@ -67,21 +67,18 @@ object Functions	{
 		readLine();
 		linksTo = Array("south","east","west");
 	}
-	def generateLevel(Level:Int)	=	{
+	def generateLevel()	=	{
 		if (Explored.contains(curLvl))	{	}	//Does nothing if already explored.
 		else	{	//Otherwise enters combat and generates Enemies.
-			generateEnemies();
-			def generateEnemies() =	{
-				var roomDifficulty = Math.round(Math.random()*3).toInt;
-				queueEnemies(roomDifficulty);
-			}
-			def queueEnemies(Difficulty:Int) =	{
-				var maxEnemies = Math.round(Math.random()*Difficulty).toInt;
+			queueEnemies();
+			def queueEnemies() =	{
+				var maxEnemies = Math.round(Math.random()*5).toInt;
 				var monsterToQueue = "";
 				for (i <- 1 to maxEnemies)	{
 					var roll = Math.round(Math.random()*100);
-					if (roll <= 45)	{ monsterToQueue = "Slime"; }
-					else if (roll <= 75 && roll > 45)	{ monsterToQueue = "Lizard"; }
+					if (roll <= 35)	{ monsterToQueue = "Slime"; }
+					else if (roll <= 65 && roll > 35)	{ monsterToQueue = "Lizard"; }
+					else if (roll <= 75 && roll > 65)	{ monsterToQueue = "Lean Machine"; }
 					else if (roll <= 85 && roll > 75)	{ monsterToQueue = "Drake"; }
 					else if (roll <= 100 && roll > 85)	{ monsterToQueue = "Matt"; }
 					queue = queue :+ monsterToQueue;
@@ -96,6 +93,7 @@ object Functions	{
 			if (queue(0) == "Slime")	{ Slime; }
 			else if (queue(0) == "Lizard")	{ Lizard; }
 			else if (queue(0) == "Drake")	{ Drake; }
+			else if (queue(0) == "Lean Machine") { LeanMachine; }
 			else	{ Matt; }
 		}
 	}
@@ -228,9 +226,10 @@ object Functions	{
 				println("You found no HP kegs in the room.");
 			}
 			if (ammo < 5)	{
-				var bows = Math.round(Math.random()*4);
-				if (bows != 0)	{
-					println("You found "+bows+" bows in the room.");
+				var arrows = Math.round(Math.random()*4).toInt;
+				if (arrows != 0)	{
+					println("You found "+arrows+" arrows in the room.");
+					ammo += arrows
 				}
 				else	{
 					println("You found no bows in the room.")
@@ -276,16 +275,23 @@ object Functions	{
 						else	{ curLvl += 2; }
 					}
 					retry = false;
-					var LevelEnv = "";
-					var roll = Math.round(Math.random()*6);
-					if (roll == 0)	{ LevelEnv = "dark"; }
-					else if (roll == 1)	{ LevelEnv = "dank"; }
-					else if (roll == 2)	{ LevelEnv = "murky"; }
-					else if (roll == 3)	{ LevelEnv = "damp"; }
-					else if (roll == 4)	{ LevelEnv = "smokey"; }
-					else if (roll == 5)	{ LevelEnv = "ruined"; }
-					else	{ LevelEnv = "stench-ridden"; }
-					println("You enter the "+LevelEnv+" "+direction+"ern room.");
+					if (Explored.contains(curLvl))	{
+						println("You enter the "+prevEnv(curLvl)+" "+direction+"ern room.");
+					}
+					else	{
+						var LevelEnv = "";
+						var roll = Math.round(Math.random()*6);
+						if (roll == 0)	{ LevelEnv = "dark"; }
+						else if (roll == 1)	{ LevelEnv = "dank"; }
+						else if (roll == 2)	{ LevelEnv = "murky"; }
+						else if (roll == 3)	{ LevelEnv = "damp"; }
+						else if (roll == 4)	{ LevelEnv = "smokey"; }
+						else if (roll == 5)	{ LevelEnv = "ruined"; }
+						else	{ LevelEnv = "stench-ridden"; }
+						prevEnv(curLvl) = LevelEnv;
+						println("You enter the "+LevelEnv+" "+direction+"ern room.");
+					}
+
 				}
 				else	{ retry = true; println(direction+" is not an available option."); }
 			}
@@ -308,15 +314,15 @@ object Functions	{
 				if (x == 2 || x == 5 || x == 8)	{ print("|"); }
 			}
 			else if (x != 10)	{
-				if (Explored.contains(x))	{ 
+				if (Explored.contains(x))	{
 				  if (x == 3 || x  == 6  || x == 9)	{ print("|"); }
 				  print("X");
 				  if (x == 2 || x == 5 || x == 8)	{ print("|"); }
 				}
-				else	{ 
+				else	{
 					if (x == 3 || x  == 6  || x == 9)	{ print(" "); }
 					if (x == 2 || x == 5 || x == 8)	{ print(" "); }
-					print(" "); 
+					print(" ");
 				}
 			}
 			else	{
@@ -329,7 +335,7 @@ object Functions	{
 		explore(3); explore(1); explore(2);
 		println();
 		explore(6); explore(4); explore(5);
-		println(); 
+		println();
 		explore(9); explore(7); explore(8);
 		println();
 		explore(10)
@@ -347,8 +353,14 @@ object Functions	{
 		KingKelman;
 		println("You have entered the final room of Kelman's basement.");
 		println("You can smell the gut-wrenching reek of doritos and mountain dew in the air.");
-		plyHP -= 15;
-		println("Unfortunately, you drink some mountain dew by accident. It reduces your hp by 15 to "+plyHP);
+		if (plyHP > 90)	{
+			plyHP -= 15;
+			println("Unfortunately, you drink some mountain dew by accident. It reduces your hp by 15 to "+plyHP);
+		}
+		else	{
+			plyHP += 20;
+			println("You drink a keg from off the ground. It restores your hp by 20 to "+plyHP);
+		}
 		if (plyHP > 0)	{
 			println("You are now facing the evil King Kelman. Defeat him at all costs.");
 		}
@@ -357,12 +369,16 @@ object Functions	{
 		println();
 		println("You have failed to defeat the evil Kan Krusher Kelman and save the kingdom of 4chan from his evil.");
 		println("Inevitably, without your assistance, the kingdom totally fell to his influence and all was lost.");
+		println("All accounts of your daring adventure fade with the passage of time.\nSoon, even Kelman does not remember the battle against the "+Class+", "+name+".")
+		println("----  DEFEAT  ----");
 		println("---- GAME OVER ----");
 	}
 	def gameSuccess() =	{
 		println();
 		println("You have defeated the evil Kan Krusher Kelman and saved the kingdom from his evil.");
-		println("Upon your return you, "+name+", are granted command of 4chan.\nNow it is your turn to lead the kingdom to glory.");
+		println("Upon your return you are granted command of 4chan.\nNow it is your turn to lead the kingdom to glory.");
+		println("The tales of "+name+", a noble "+Class+", will be sung throughout the lands for centuries to come.")
+		println("----  DEFEAT  ----");
 		println("---- GAME OVER ----");
 	}
 }

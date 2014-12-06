@@ -4,7 +4,7 @@ object main extends App {
 	while (play)	{
 		intro();
 		while (plyHP > 0 && curLvl != 10)	{
-			generateLevel(curLvl);
+			generateLevel();
 			printLevelInfo();
 			while (plyHP > 0 && enemyHP > 0)	{
 				combat();
