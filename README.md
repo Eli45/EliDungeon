@@ -13,7 +13,7 @@ If you do not succeed the kingdom is surely doomed to a thousand years of darkne
 
 ##Instructions
 ----------
-* Follow the on screen instructions. It should fairly straight forward. Your goal is to get to Kelman's room and defeat him.
+* Follow the on screen instructions. It should be fairly straight forward. Your goal is to get to Kelman's room and defeat him.
 
 ##Hotkeys and ammo
 ----------
