@@ -22,6 +22,7 @@
 		>Matt
 			<10%>Turtle:
 				>90% of player damage absorbed. Deals 20% of it's total damage while turtling.
+				>Lasts 3 turns.
 				>Only usable once.
 		>Kelman
 			<15%>Chug:
