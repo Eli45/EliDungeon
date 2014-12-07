@@ -7,7 +7,7 @@ object Functions	{
 		println("What are you known as fair soldier?");
 		name = readLine();
 		while (retry)	{
-			println("Were you known to be an archer, knight, mage, or assassin before this unfortunate turn of events.");
+			println("Were you known to be an archer, knight, mage, or assassin before this unfortunate turn of events?");
 			Class = readLine();
 			if (Class.equalsIgnoreCase("archer"))	{ retry = false; ClassBonus("archer"); }
 			else if (Class.equalsIgnoreCase("knight"))	{ retry = false; ClassBonus("knight"); }
@@ -75,6 +75,14 @@ object Functions	{
 						"5" -> 18,
 						"6" -> 23
 					);
+					minVal = Map(
+						"longsword" -> 2,
+						"shortsword" -> 4,
+						"bow" -> 4,
+						"fireball" -> 10,
+						"lightning" -> 12,
+						"contortion" -> 14
+					);
 					mage = true;
 				}
 			}
@@ -88,6 +96,7 @@ object Functions	{
 		}
 		println("Press enter to venture into the basement.");
 		readLine();
+		println("You enter the first room.");
 		linksTo = Array("south","east","west");
 	}
 	def generateLevel()	=	{
@@ -165,7 +174,7 @@ object Functions	{
 					println();
 					println("What weapon would you like to use to attack?\nWeapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)["+ammo+"].");
 					if (mage)	{
-						println("You can also use the spells: 'fireball'(4){20}, 'lightning'(5){30}, 'contortion'(6){45}. Mana["+mana+"]");
+						println("You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana["+mana+"]");
 					}
 					wep = readLine().toLowerCase;
 					if (weapons.contains(wep))	{
@@ -180,13 +189,13 @@ object Functions	{
 							println(wep.capitalize+" has no ammo!");
 							retry = true;
 						}
-						else if (wep == "fireball" && mana < 20)	{
+						else if (wep == "fireball" && mana < 15)	{
 							println("You have no mana to use "+wep.capitalize);
 						}
-						else if (wep == "lightning" && mana < 30)	{
+						else if (wep == "lightning" && mana < 20)	{
 							println("You have no mana to use "+wep.capitalize);
 						}
-						else if (wep == "contortion" && mana < 45)	{
+						else if (wep == "contortion" && mana < 25)	{
 							println("You have no mana to use "+wep.capitalize);
 						}
 						else	{
@@ -204,7 +213,7 @@ object Functions	{
 					if (roll < minDMG)	{ roll = minDMG; }
 					else if (roll > wepDMG)	{ roll = wepDMG; }
 					var missedOrNo = Math.round(Math.random()*100);
-					if (missedOrNo <= missChance)	{ println("Your attack missed!"); }
+					if (missedOrNo < missChance)	{ println("Your attack missed!"); }
 					else	{
 						var newRoll = roll.toDouble;
 						def typeDamage() =	{
@@ -223,9 +232,9 @@ object Functions	{
 						if (mage)	{
 							var usedMana = false;
 							var expMana = 0;
-							if (wep == "fireball")	{ mana -= 20; expMana = 20; usedMana = true; }
-							else if (wep == "lightning")	{ mana -= 30; expMana = 30; usedMana = true; }
-							else if (wep == "contortion")	{mana -= 45; expMana = 45; usedMana = true; }
+							if (wep == "fireball")	{ mana -= 15; expMana = 15; usedMana = true; }
+							else if (wep == "lightning")	{ mana -= 20; expMana = 20; usedMana = true; }
+							else if (wep == "contortion")	{mana -= 25; expMana = 25; usedMana = true; }
 							if (usedMana)	{
 								println("By using "+wep+" you expended "+expMana+" mana. This leaves you at "+mana+" mana.");
 							}
@@ -257,7 +266,6 @@ object Functions	{
 						plyHP -= mDMG.toInt;
 						if (plyHP < 0)	{ plyHP = 0; }
 						println("Your HP is now "+plyHP);
-						println();
 					}
 				}
 			}
@@ -277,6 +285,7 @@ object Functions	{
 			else	{potion = 35;}
 			plyHP += potion;
 			if (plyHP > 100)	{ plyHP = 100; }
+			println();
 			if (potion != 0)	{
 				println(s"You find a $potion HP keg that restores your hp to $plyHP.");
 			}
@@ -294,8 +303,13 @@ object Functions	{
 					println("You found no arrows in the room.")
 				}
 			}
-			mana += 25;
-			println("After the battle was over. You regenerated "+mana+" mana.");
+			if (mana != 100)	{
+				var manaToGain = 25;
+				if (mana > 75)	{ manaToGain = 100 - mana; }
+				mana += manaToGain;
+				if (mana > 100)	{ mana = 100; }
+				println("You regenerated "+manaToGain+" mana. Your total mana is now "+mana);
+			}
 		}
 	}
 	def move() =	{

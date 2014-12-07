@@ -3,7 +3,7 @@ object publicVariables	{
 	var mDAM = 0;
 	var linksTo = Array("").drop(1);	//Array for the 4 possible directions.
 	var prevEnv = Array("","dark","","","","","","","","",""); //Array for previous lvlenv. //1st lvl always dark.
-					//	^This element is used as a placeholder.
+	//element 0 is used as a placeholder.
 	var Class = "";
 	var name = "";
 	var ammo = 10;
