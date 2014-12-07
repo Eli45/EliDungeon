@@ -1,4 +1,14 @@
 	> UPDATE COMMENTS
-	> [Optional] Add special monster abilities. See C++ version(clutch).
 	> Prepare for final version. Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
+		>Split 'Functions.scala' into smaller code files? Then link them together with a global 'Functions.scala' file?
 	> Ask Kelman about map regarding lower and top walls.
+	> [Optional] Add special monster abilities. See C++ version(clutch).
+		>Lean Machine
+			>Clutch: if HP 0, then has chance of raising hp to 20 for a second chance. (one time only.)
+		>Slime
+			>
+		>Drake
+			>Winged attack: 
+				>Large damage dealt.
+				>Player is stunned and cannot attack back.
+
