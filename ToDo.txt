@@ -30,8 +30,5 @@
 				>+50% damage for the next 2 turns.
 				>Usable multiple times.
 				
-	> Balance mage, as of right now his spells cost too much for him to be a justifiable choice to play as.
-		> Regenerate mana during fight (10 per turn?)
-		> Buff his spells?
 	> Include basic spells/hexes for non-mage types that are less powerful.
 
