@@ -7,11 +7,12 @@ object Functions	{
 		println("What are you known as fair soldier?");
 		name = readLine();
 		while (retry)	{
-			println("Were you known to be an archer, knight, or assassin before this unfortunate turn of events.");
+			println("Were you known to be an archer, knight, mage, or assassin before this unfortunate turn of events.");
 			Class = readLine();
 			if (Class.equalsIgnoreCase("archer"))	{ retry = false; ClassBonus("archer"); }
 			else if (Class.equalsIgnoreCase("knight"))	{ retry = false; ClassBonus("knight"); }
-			else if (Class.equalsIgnoreCase("assassin"))	{ retry = false; ClassBonus("assassin") }
+			else if (Class.equalsIgnoreCase("assassin"))	{ retry = false; ClassBonus("assassin"); }
+			else if (Class.equalsIgnoreCase("mage"))	{ retry = false; ClassBonus("mage"); }
 			else	{ retry = true; println(Class+" is not a class."); }
 			def ClassBonus(Class:String) =	{	//Sets damages for different classes.
 				if (Class == "archer")	{
@@ -44,7 +45,7 @@ object Functions	{
 						"bow" -> 1
 					);
 				}
-				else	{
+				else if (Class == "assassin")	{
 					weapons = Map(
 						"longsword" -> 10,
 						"shortsword" -> 11,
@@ -59,10 +60,32 @@ object Functions	{
 						"bow" -> 4
 					);
 				}
+				else	{ //Mage
+					weapons = Map(
+						"longsword" -> 5,
+						"shortsword" -> 7,
+						"bow" -> 5,
+						"1" -> 5,
+						"2" -> 7,
+						"3" -> 5,
+						"fireball" -> 14,	//Special mage powers. Requires mana.
+						"lightning" -> 18,
+						"contortion" -> 23,
+						"4" -> 14,
+						"5" -> 18,
+						"6" -> 23
+					);
+					mage = true;
+				}
 			}
 		}
 		println("Then so it was my noble "+Class+". The evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
-		println("The only things you take with you into the dark are your longsword, shortsword, and bow.");
+		if (mage)	{
+			println("The only things you take with you into the dark are your longsword, shortsword, bow, and knowledge of spells.");
+		}
+		else	{
+			println("The only things you take with you into the dark are your longsword, shortsword, and bow.");
+		}
 		println("Press enter to venture into the basement.");
 		readLine();
 		linksTo = Array("south","east","west");
@@ -98,6 +121,7 @@ object Functions	{
 		}
 	}
 	def printLevelInfo() =	{
+		//Prints the monsters in the room to the user.
 		if (queue.nonEmpty)	{
 			println("Monsters in this room.\n------------------");
 			for (i <- 0 to queue.length-1)	{
@@ -120,6 +144,7 @@ object Functions	{
 	/* ---- COMBAT ---- */
 	def combat() =	{
 		while (queue.nonEmpty && plyHP > 0)	{
+			//Only used in the boss battle. (Used for supply drops.)
 			if (plyHP < 50 && boss == true)	{
 				var roll = Math.round(Math.random()*100)
 				if (roll <= 20)	{
@@ -128,6 +153,7 @@ object Functions	{
 					println("HP restored by 15 to "+plyHP);
 				}
 			}
+			//Prompts player to choose one of the three weapons.
 			chooseWeapon();
 			def chooseWeapon() =	{
 				var wepDMG = 0;
@@ -138,15 +164,30 @@ object Functions	{
 				while (retry)	{
 					println();
 					println("What weapon would you like to use to attack?\nWeapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)["+ammo+"].");
+					if (mage)	{
+						println("You can also use the spells: 'fireball'(4){20}, 'lightning'(5){30}, 'contortion'(6){45}. Mana["+mana+"]");
+					}
 					wep = readLine().toLowerCase;
 					if (weapons.contains(wep))	{
 						wepDMG = weapons.apply(wep);
 						if (wep == "1")	{ wep = "longsword"; }
 						else if (wep == "2")	{ wep = "shortsword"; }
 						else if (wep == "3")	{ wep = "bow"; }
+						else if (wep == "4")	{ wep = "fireball"; }
+						else if (wep == "5")	{ wep = "lightning"; }
+						else if (wep == "6")	{ wep = "contortion"; }
 						if (wep == "bow" && ammo <= 0)	{
 							println(wep.capitalize+" has no ammo!");
 							retry = true;
+						}
+						else if (wep == "fireball" && mana < 20)	{
+							println("You have no mana to use "+wep.capitalize);
+						}
+						else if (wep == "lightning" && mana < 30)	{
+							println("You have no mana to use "+wep.capitalize);
+						}
+						else if (wep == "contortion" && mana < 45)	{
+							println("You have no mana to use "+wep.capitalize);
 						}
 						else	{
 							missChance = missChances.apply(wep);
@@ -156,6 +197,7 @@ object Functions	{
 					}
 					else { retry = true; println(wep.capitalize+" is not a weapon."); }
 				}
+				//Rolls damages dealt.
 				dicerolls();
 				def dicerolls() =	{
 					var roll = Math.round(Math.random()*(wepDMG+6));
@@ -170,16 +212,30 @@ object Functions	{
 							var dmgs = 0.0;
 							if (wep == "longsword")	{ dmgs = LSdmgs.apply(queue(0)) * newRoll; }
 							else if (wep == "shortsword")	{ dmgs = SSdmgs.apply(queue(0)) * newRoll; }
-							else	{ BOWdmgs.apply(queue(0)) * newRoll; }
+							else if (wep == "bow")	{ BOWdmgs.apply(queue(0)) * newRoll; }
+							else if (wep == "fireball")	{ FBdmgs.apply(queue(0)) * newRoll; }
+							else if (wep == "lightning")	{ LTdmgs.apply(queue(0)) * newRoll; }
+							else	{ CTdmgs.apply(queue(0)) * newRoll; }
 						}
 						var finalDAM = newRoll.toInt;
 						println("You attacked "+queue(0)+ s" with $wep for $finalDAM.");
 						if (wep == "bow")	{ ammo -= 1; }
+						if (mage)	{
+							var usedMana = false;
+							var expMana = 0;
+							if (wep == "fireball")	{ mana -= 20; expMana = 20; usedMana = true; }
+							else if (wep == "lightning")	{ mana -= 30; expMana = 30; usedMana = true; }
+							else if (wep == "contortion")	{mana -= 45; expMana = 45; usedMana = true; }
+							if (usedMana)	{
+								println("By using "+wep+" you expended "+expMana+" mana. This leaves you at "+mana+" mana.");
+							}
+						}
 						enemyHP -= finalDAM;
 						if (enemyHP <= 0) { enemyHP = 0; }
 						println(queue(0)+s"'s HP is now $enemyHP.");
 					}
 				}
+				//If monster is dead then we drop the current one and face the next.
 				if (enemyHP <= 0) {
 					queue = queue.drop(1);
 					if (queue.nonEmpty)	{
@@ -189,6 +245,7 @@ object Functions	{
 					}
 				}
 				else { enemyAttack(); }
+				//Serves the same purpose as dicerolls(); Rolls monster damage.
 				def enemyAttack() =	{
 					var mDMG = Math.round(Math.random()*mDAM);
 					var roll = Math.round(Math.random()*100);
@@ -207,6 +264,7 @@ object Functions	{
 		}
 	}
 	def treasure() =	{
+		//Decides whether player can obtain potions from this room or not.
 		if (Explored.contains(curLvl))	{
 			println("You have already looted this room!")
 		}
@@ -225,6 +283,7 @@ object Functions	{
 			else	{
 				println("You found no HP kegs in the room.");
 			}
+			//Gives bows to player if their bow count is less than 5 and they get a little lucky.
 			if (ammo < 5)	{
 				var arrows = Math.round(Math.random()*4).toInt;
 				if (arrows != 0)	{
@@ -232,15 +291,19 @@ object Functions	{
 					ammo += arrows
 				}
 				else	{
-					println("You found no bows in the room.")
+					println("You found no arrows in the room.")
 				}
 			}
+			mana += 25;
+			println("After the battle was over. You regenerated "+mana+" mana.");
 		}
 	}
 	def move() =	{
+		//Adds cur level to explored array.
 		Explored = Explored :+ curLvl;
 		var retry = true;
 		while (retry)	{
+			//Prints options to move.
 			println("What direction would you like to travel in?");
 			print("Your options include ");
 			for (i <- 0 to linksTo.length-1)	{
@@ -279,6 +342,7 @@ object Functions	{
 						println("You enter the "+prevEnv(curLvl)+" "+direction+"ern room.");
 					}
 					else	{
+						//Rolls dice for random level environment.
 						var LevelEnv = "";
 						var roll = Math.round(Math.random()*6);
 						if (roll == 0)	{ LevelEnv = "dark"; }
@@ -307,20 +371,21 @@ object Functions	{
 		}
 	}
 	def makeMap() =	{
+		//Map making function.
 		def explore(x:Int) =	{
 			if (x == curLvl)	{
-				if (x == 3 || x  == 6  || x == 9)	{ print("|"); }
+				if (x == 3 || x  == 6 || x == 9)	{ print("|"); }
 				print ("P");
 				if (x == 2 || x == 5 || x == 8)	{ print("|"); }
 			}
 			else if (x != 10)	{
 				if (Explored.contains(x))	{
-				  if (x == 3 || x  == 6  || x == 9)	{ print("|"); }
+				  if (x == 3 || x  == 6 || x == 9)	{ print("|"); }
 				  print("X");
 				  if (x == 2 || x == 5 || x == 8)	{ print("|"); }
 				}
 				else	{
-					if (x == 3 || x  == 6  || x == 9)	{ print(" "); }
+					if (x == 3 || x  == 6 || x == 9)	{ print(" "); }
 					if (x == 2 || x == 5 || x == 8)	{ print(" "); }
 					print(" ");
 				}
@@ -349,18 +414,22 @@ object Functions	{
 		 */
 	}
 	def bossEntry() =	{
+		//Boss room, level 10.
 		queue = Array("").drop(1); queue = queue :+ "King Kelman";
 		KingKelman;
 		println("You have entered the final room of Kelman's basement.");
 		println("You can smell the gut-wrenching reek of doritos and mountain dew in the air.");
+		//If player too powerful, nerf.
 		if (plyHP > 90)	{
 			plyHP -= 15;
 			println("Unfortunately, you drink some mountain dew by accident. It reduces your hp by 15 to "+plyHP);
 		}
+		//Otherwise if player too weak, buff.
 		else	{
 			plyHP += 20;
 			println("You drink a keg from off the ground. It restores your hp by 20 to "+plyHP);
 		}
+		//Checks that the player isn't dead after the nerf. Is not longer needed due only nerfing if above 90 hp but I'm leaving it in.
 		if (plyHP > 0)	{
 			println("You are now facing the evil King Kelman. Defeat him at all costs.");
 		}
