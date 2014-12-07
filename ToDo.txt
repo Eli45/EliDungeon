@@ -1,14 +1,36 @@
 	> UPDATE COMMENTS
-	> Prepare for final version. Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
-		>Split 'Functions.scala' into smaller code files? Then link them together with a global 'Functions.scala' file?
+	> Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
 	> Ask Kelman about map regarding lower and top walls.
+	> Possibly adjust monster minimum damage values.
 	> [Optional] Add special monster abilities. See C++ version(clutch).
-		>Lean Machine
-			>Clutch: if HP 0, then has chance of raising hp to 20 for a second chance. (one time only.)
 		>Slime
-			>
+			<%30>Absorb: 
+				>Absorbs player damage and reduces it by 50%.
+				>Usable multiple times.
+		>Lizard
+			<50%>Dodge:
+				>Causes player to miss. (If spell casted, does nothing.)
+				>Usable multiple times.
+		>Lean Machine
+			<50%>Clutch:
+				>If HP 0, then has chance of raising hp to 20 for a second chance. (one time only.)		
 		>Drake
-			>Winged attack: 
+			<5%>Winged attack: 
 				>Large damage dealt.
 				>Player is stunned and cannot attack back.
+				>Can be called upon multiple times.
+		>Matt
+			<10%>Turtle:
+				>90% of player damage absorbed. Deals 20% of it's total damage while turtling.
+				>Only usable once.
+		>Kelman
+			<15%>Chug:
+				>15hp regained.
+				>+50% damage for the next 2 turns.
+				>Usable multiple times.
+				
+	> Balance mage, as of right now his spells cost too much for him to be a justifiable choice to play as.
+		> Regenerate mana during fight (10 per turn?)
+		> Buff his spells?
+	> Include basic spells/hexes for non-mage types that are less powerful.
 
