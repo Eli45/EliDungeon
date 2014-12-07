@@ -1,5 +1,4 @@
 	> UPDATE COMMENTS
-	> [Very Optional] Add spells that require ammunition?
-	> [Optional] Add special monster abilities. See C++ version.
-	> Prepare for final version. Tidy up any ugly code. [SEMI-COLONS]
+	> [Optional] Add special monster abilities. See C++ version(clutch).
+	> Prepare for final version. Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
 	> Ask Kelman about map regarding lower and top walls.
