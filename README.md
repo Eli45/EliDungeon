@@ -20,6 +20,8 @@ If you do not succeed the kingdom is surely doomed to a thousand years of darkne
 * Hotkeys to the right of the listed weapon can be typed into the console for quick attacking. Looks like: 'name'(x).
 
 * Ammo for weapons that require it is listed as [x], to the right of the hotkey.
+
+* Mana required to cast spells is listed as {x}, to the right of the hotkey. Total mana is listed as [mana] at the end of the line.
   
 ##Map
 ----------
