@@ -1,5 +1,10 @@
-EliDungeon
-==========
+#REQUIREMENTS
+----------
+* Java Runtime Environment 7 or greater 
+    * ( http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html )
+* Scala 2.11.4 or greater 
+    * ( http://www.scala-lang.org/ )
+
 ##Description
 ----------
 Basic text-based dungeon adventure game created for Kelman's class.
