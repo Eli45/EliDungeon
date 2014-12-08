@@ -2,6 +2,12 @@
 	> Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
 	> Ask Kelman about map regarding lower and top walls.
 	> Possibly adjust monster minimum damage values.
+	> [Optional] Different special abilities depending on player class
+		>Knight
+		>Archer
+		>Assassin
+		>Mage[DONE
+			>Spells
 	> [Optional] Add special monster abilities. See C++ version(clutch).
 		>Slime
 			<%30>Absorb: 
