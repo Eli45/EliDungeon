@@ -37,4 +37,5 @@
 				>Usable multiple times.
 				
 	> Include basic spells/hexes for non-mage types that are less powerful.
+		>Could possible make enemy damage reduced by x% or buff your own damage?
 
