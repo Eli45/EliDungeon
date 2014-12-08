@@ -4,6 +4,8 @@
     * ( http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html )
 * Scala 2.11.4 or greater 
     * ( http://www.scala-lang.org/ )
+###To Run
+* Simply execute 'Dungeon.bat' included in the repository.
 
 ##Description
 ----------
