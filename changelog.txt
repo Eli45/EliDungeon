@@ -1,9 +1,6 @@
 Known Bugs:
->Reset function bugged due to massive ammounts of variables I've added.
->HP bugged on lean machine? Randomly gave it 15 hp at one point, unknown how to replicate.
-	>dmg bugged. x attacked you for 0! Possible due to it not counting as a miss for some reason?
-	
-	>Weird inconsistent damage bug for player: Check Logic in printDamage(); otherwise I'm not sure what this is.
+>Reset function bugged due to massive ammounts of variables I've added.	
+	>I think this is fixed but I'm not really sure.
 		>	What weapon would you like to use to attack?
 			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
 			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[80]
@@ -11,6 +8,8 @@ Known Bugs:
 			Slime missed!
 			Your HP is now 80/80
 			
+	>0 DMG BUG NOT FIXED
+		
 	> Weird inconsistent ability bug for 'drake': Check Logic in printDamage();
 		>	By using lightning you expended 20 mana. This leaves you at 40 mana.
 			You attacked Drake with lightning for 10.
@@ -42,7 +41,7 @@ TO DO:
 	} TO:
 	println("All accounts of your daring adventure fade with the passage of time.");
 	if (boss)	{ println("Soon, even Kelman does not remember the battle against the "+Class+", "+name+".");}
-	
+	* Buff longsword. 45% miss chance is too high.
 	> Remove mentions of Entities.scala
 	[MOST IMPORTANT] > Fix bugs.
 	[MOST IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT BUGS SECTION.
@@ -65,7 +64,9 @@ TO DO:
 				> DOES NOT REWARD LOOT.
 				
 Done:
-	
+	* Fixed absorbed bug with slimes.
+	* Fixed lean machine attack bug
+
 	
 	
 Changelog:

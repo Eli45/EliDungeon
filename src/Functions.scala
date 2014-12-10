@@ -121,7 +121,7 @@ object Functions	{
 						var ab = "";
 						if (roll <= 35)	{ char = "Slime";mhp = 13;md = 6;mc = 20;ab = "absorb"; }
 						else if (roll <= 65 && roll > 35)	{ char = "Lizard";mhp = 6;md = 7;mc = 10;ab = "dodge"; }
-						else if (roll <= 75 && roll > 65)	{ char = "Lean Machine";mhp = 15;md = 23;mc = 20;ab = "clutch"; }
+						else if (roll <= 75 && roll > 65)	{ char = "Lean Machine";md = 23;mhp = 15;mc = 20;ab = "clutch"; }
 						else if (roll <= 85 && roll > 75)	{ char = "Drake";mhp = 35;md = 17;mc = 35;ab = "fly"; }
 						else if (roll <= 100 && roll > 85)	{ char = "Matt";mhp = 50;md = 13;mc = 40;ab = "turtle"; }
 						monsterToQueue = new character( char, mhp, md, mc, ab );
@@ -254,6 +254,7 @@ object Functions	{
 							dead = false;
 							clutched = true;
 							usedAbility = true;
+							println(queue(0).name + " used "+queue(0).ability+" and was brought back to life!");
 							enemyAttack();
 						}
 						else	{
@@ -275,9 +276,9 @@ object Functions	{
 				else { enemyAttack(); }
 				//Serves the same purpose as dicerolls(); Rolls monster damage.
 				def enemyAttack() =	{
-					if (queue(0).name != "Lean Machine" && !dead)	{
+					if (!dead)	{
 						var abOrNo = Math.round(Math.random()*100);
-						if (abOrNo <= queue(0).abilityChance)	{
+						if (abOrNo <= queue(0).abilityChance && queue(0).name != "Lean Machine")	{
 							queue(0).useAbility();
 							if (queue(0).ability == "turtle")	{
 								turtling = true;
@@ -319,9 +320,7 @@ object Functions	{
 						println("However "+queue(0).name+" used "+queue(0).ability+" and "+queue(0).abilityDesc);
 						println(queue(0).name+s"'s HP is now " + queue(0).hp + "/"+queue(0).maxhp);
 					}
-					else	{
-						println("Im not sure what happened here! Please report this bug at:\nhttps://github.com/Eli45/EliDungeon");
-					}
+					else	{}
 					
 					if (!usedAbility && !dead)	{
 						println(queue(0).name+s" attacked you for " + queue(0).lastdmg);
