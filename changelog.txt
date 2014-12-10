@@ -34,6 +34,56 @@ Known Bugs:
 			You regenerated 15 mana. Your total mana is now 100
 			What direction would you like to travel in?
 		> Only happened once and it seemed to be a random occurance? Odd.
+		
+	>Not sure if bug or not or just extremely lucky.
+		>	What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			Lizard used dodge!
+			Lizard dodged your attack!
+			Your HP is now 66/80
+
+			What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			Lizard used dodge!
+			Lizard dodged your attack!
+			Your HP is now 66/80
+
+			What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			Lizard used dodge!
+			Lizard dodged your attack!
+			Your HP is now 66/80
+
+			What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			Lizard used dodge!
+			Lizard dodged your attack!
+			Your HP is now 66/80
+
+			What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			Lizard used dodge!
+			Lizard dodged your attack!
+			Your HP is now 66/80
+
+			What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
+			2
+			You attacked Lizard with shortsword for 6.
+			Lizard's HP is now 0/6
+			Your HP is now 66/80
+
 
 TO DO:
 	>if (boss)	{
