@@ -1,4 +1,5 @@
 object Entities	{
+  /*	OLD FILE, SWITCHED TO USING CLASSES
 	import publicVariables._
 	/* ---- LOW LEVEL ---- */
 	def Slime =	{
@@ -42,4 +43,5 @@ object Entities	{
 		boss = true;
 	}
 	/* ---- /BOSS ---- */
+	 */
 }

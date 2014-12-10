@@ -1,0 +1,108 @@
+Known Bugs:
+>Reset function bugged due to massive ammounts of variables I've added.
+>HP bugged on lean machine? Randomly gave it 15 hp at one point, unknown how to replicate.
+	>dmg bugged. x attacked you for 0! Possible due to it not counting as a miss for some reason?
+	
+	>Weird inconsistent damage bug for player:
+		>	What weapon would you like to use to attack?
+			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[80]
+			2
+			Slime missed!
+			Your HP is now 80/80
+			
+	> Weird inconsistent ability bug for 'drake':
+		>	By using lightning you expended 20 mana. This leaves you at 40 mana.
+			You attacked Drake with lightning for 10.
+			Drake's HP is now 0/35
+			Drake used fly!
+			Drake flew away from your attack and smashed back into you for 10 damage!
+			Your HP is now 64/80
+	
+	>There are no monsters in the room.
+		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
+		
+	>placeholder bugged.
+		>	south
+			You enter the smokey southern room.
+			
+			Monsters in this room.
+			------------------
+			1. placeholder.
+			You will be facing placeholder first.
+			
+			You found no HP kegs in the room.
+			You regenerated 15 mana. Your total mana is now 100
+			What direction would you like to travel in?
+		> Only happened once and it seemed to be a random occurance? Odd.
+
+TO DO:
+	[MOST IMPORTANT] > Fix bugs.
+	[MOST IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT BUGS SECTION.
+	> Ask Kelman about map regarding lower and top walls.
+	[IMPORTANT] > Rebalance player miss chances. The game can really be unfair and inbalanced if you get unlucky.
+	> Check for unused variables and remove them.
+
+	> [Optional] Different special abilities depending on player class
+		>Add stamina required to execute these.
+		>Knight
+			> Flurry
+				>
+		>Archer
+			> Volley
+				>0% chance to miss.
+				>Deals 3x the damage of a single arrow.
+		>Assassin
+			> Sneak
+				> Enemy has a 70% chance of not seeing you and allowing you to exit the room with no combat.
+				> DOES NOT REWARD LOOT.
+				
+Done:
+	
+	
+	
+Changelog:
+	BUILD v1.2:
+		* Restructured monsters to use a class based system.
+		* Created (within character && player class) useAbility and attack functions.
+		* Abilities:
+			* Knight
+				*
+			* Archer
+				*
+			* Assassin
+				*
+			* Mage(Not included in class framework)
+				* Fireball, lightning, contortion.
+				* Requires Mana.
+			
+			* Monsters:
+				*Slime
+					<%30>Absorb: 
+						*Absorbs player damage and reduces it by 50%.
+						*Usable multiple times.
+				*Lizard
+					<50%>Dodge:
+						*Causes player to miss.
+						*Usable multiple times.
+				*Lean Machine
+					<50%>Clutch:
+						*If HP 0, then has chance of raising HP to 20 for a second chance.
+						*Only usable once.
+						
+				*Drake
+					<5%>Winged attack: 
+						*No player damage dealt, large damage dealt against player.
+						*Usable multiple times.
+				*Matt
+					<10%>Turtle:
+						*90% of player damage absorbed.
+						*Applies to next turn.
+						*Only usable once.
+
+		* Updated damage display. Now displays maxhp(starting health).
+		* Fixed major lean machine bug that crashed the program when lean machine is attacked.
+		* 
+		*
+		*
+		*

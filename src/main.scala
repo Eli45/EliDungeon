@@ -1,15 +1,16 @@
 object main extends App {
 	//Ask Kelman about makeMap(); function regarding bottom walls.
-	import publicVariables._, Entities._, Functions._
+	//Look at NewClassTest.scala
+	import publicVariables._, publicClasses._, Functions._
 	while (play)	{
 		intro();
-		while (plyHP > 0 && curLvl != 10)	{
+		while (player.hp > 0 && curLvl != 10)	{
 			generateLevel();
 			printLevelInfo();
-			while (plyHP > 0 && enemyHP > 0)	{
+			while (player.hp > 0 && queue(0).hp > 0)	{
 				combat();
 			}
-			if (plyHP > 0)	{
+			if (player.hp > 0)	{
 				treasure();
 				move();
 			}
@@ -20,10 +21,10 @@ object main extends App {
 		}
 		else	{
 			bossEntry();
-			while (plyHP > 0 && enemyHP > 0)	{
+			while (player.hp > 0 && queue(0).hp > 0)	{
 				combat();
 			}
-			if (plyHP <= 0) {
+			if (player.hp <= 0) {
 				failureMessage();
 			}
 			else	{
