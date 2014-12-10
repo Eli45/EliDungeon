@@ -37,6 +37,7 @@ Known Bugs:
 		> Only happened once and it seemed to be a random occurance? Odd.
 
 TO DO:
+	> Remove mentions of Entities.scala
 	[MOST IMPORTANT] > Fix bugs.
 	[MOST IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT BUGS SECTION.
 	> Ask Kelman about map regarding lower and top walls.
