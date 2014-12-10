@@ -37,6 +37,12 @@ Known Bugs:
 		> Only happened once and it seemed to be a random occurance? Odd.
 
 TO DO:
+	>if (boss)	{
+			println("All accounts of your daring adventure fade with the passage of time.\nSoon, even Kelman does not remember the battle against the "+Class+", "+name+".")
+	} TO:
+	println("All accounts of your daring adventure fade with the passage of time.");
+	if (boss)	{ println("Soon, even Kelman does not remember the battle against the "+Class+", "+name+".");}
+	
 	> Remove mentions of Entities.scala
 	[MOST IMPORTANT] > Fix bugs.
 	[MOST IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT BUGS SECTION.
