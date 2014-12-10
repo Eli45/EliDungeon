@@ -1,41 +1,19 @@
-	> UPDATE COMMENTS
-	> Tidy up any ugly code. [SEMI-COLONS][WHITESPACES]
-	> Ask Kelman about map regarding lower and top walls.
-	> Possibly adjust monster minimum damage values.
-	> [Optional] Different special abilities depending on player class
-		>Knight
-		>Archer
-		>Assassin
-		>Mage[DONE
-			>Spells
-	> [Optional] Add special monster abilities. See C++ version(clutch).
-		>Slime
-			<%30>Absorb: 
-				>Absorbs player damage and reduces it by 50%.
-				>Usable multiple times.
-		>Lizard
-			<50%>Dodge:
-				>Causes player to miss. (If spell casted, does nothing.)
-				>Usable multiple times.
-		>Lean Machine
-			<50%>Clutch:
-				>If HP 0, then has chance of raising hp to 20 for a second chance. (one time only.)		
-		>Drake
-			<5%>Winged attack: 
-				>Large damage dealt.
-				>Player is stunned and cannot attack back.
-				>Can be called upon multiple times.
-		>Matt
-			<10%>Turtle:
-				>90% of player damage absorbed. Deals 20% of it's total damage while turtling.
-				>Lasts 3 turns.
-				>Only usable once.
-		>Kelman
-			<15%>Chug:
-				>15hp regained.
-				>+50% damage for the next 2 turns.
-				>Usable multiple times.
-				
-	> Include basic spells/hexes for non-mage types that are less powerful.
-		>Could possible make enemy damage reduced by x% or buff your own damage?
+Final ToDo update. Will be included in changelog.txt from now on.
 
+	> Ask Kelman about map regarding lower and top walls.
+	[IMPORTANT] > Rebalance player miss chances. The game can really be unfair and inbalanced if you get unlucky.
+	> Check for unused variables and remove them.
+	[IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT
+	> [Optional] Different special abilities depending on player class
+		>Add stamina required to execute these.
+		>Knight
+			> Flurry
+				>
+		>Archer
+			> Volley
+				>0% chance to miss.
+				>Deals 3x the damage of a single arrow.
+		>Assassin
+			> Sneak
+				> Enemy has a 70% chance of not seeing you and allowing you to exit the room with no combat.
+				>DOES NOT REWARD LOOT.
