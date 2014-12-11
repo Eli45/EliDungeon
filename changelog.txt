@@ -3,29 +3,18 @@ Known Bugs:
 	>There are no monsters in the room. Check placeholder?
 		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 		
-
-
 TO DO:
-	>if (boss)	{
-			println("All accounts of your daring adventure fade with the passage of time.\nSoon, even Kelman does not remember the battle against the "+Class+", "+name+".")
-	} TO:
-	println("All accounts of your daring adventure fade with the passage of time.");
-	if (boss)	{ println("Soon, even Kelman does not remember the battle against the "+Class+", "+name+".");}
-	* Buff longsword. 45% miss chance is too high.
-	> Remove mentions of Entities.scala
-	[MOST IMPORTANT] > Fix bugs.
-	[MOST IMPORTANT] > FOR BUGS REFER TO CHANGELOG.TXT BUGS SECTION.
+
+	> Remove Entities.scala
+	
 	> Ask Kelman about map regarding lower and top walls.
+	
+	
 	[IMPORTANT] > Rebalance player miss chances. The game can really be unfair and inbalanced if you get unlucky.
+		> Longsword, shortsword.
+	
+	
 	> Check for unused variables and remove them.
-	> Re-word clutch ability text?
-		>	4
-			By using fireball you expended 15 mana. This leaves you at 85 mana.
-			You attacked Lean Machine with fireball for 15.
-			Lean Machine's HP is now 15/15
-			Lean Machine used clutch!
-			Lean Machine came back to life with 15 hp.
-			Your HP is now 67/80
 
 	> [Optional] Different special abilities depending on player class
 		>Add stamina required to execute these.
@@ -41,12 +30,6 @@ TO DO:
 				> Enemy has a 70% chance of not seeing you and allowing you to exit the room with no combat.
 				> DOES NOT REWARD LOOT.
 				
-Done:
-	* Fixed absorbed bug with slimes.
-	* Fixed lean machine attack bug
-
-	
-	
 Changelog:
 	BUILD v1.3:
 		* Fixed lean machine clutch bug.
@@ -58,17 +41,7 @@ Changelog:
 	BUILD v1.2:
 		* Restructured monsters to use a class based system.
 		* Created (within character && player class) useAbility and attack functions.
-		* Abilities:
-			* Knight
-				*
-			* Archer
-				*
-			* Assassin
-				*
-			* Mage(Not included in class framework)
-				* Fireball, lightning, contortion.
-				* Requires Mana.
-			
+		* Abilities:		
 			* Monsters:
 				*Slime
 					<%30>Absorb: 
@@ -95,7 +68,3 @@ Changelog:
 
 		* Updated damage display. Now displays maxhp(starting health).
 		* Fixed major lean machine bug that crashed the program when lean machine is attacked.
-		* 
-		*
-		*
-		*
