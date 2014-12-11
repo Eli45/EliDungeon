@@ -21,7 +21,7 @@ object publicClasses	{
 		else if (ability == "dodge")	{ canDodge = true; abilityChance = 50;abilityDesc = "dodged your attack!"; }
 		else if (ability == "turtle")	{ canTurtle = true; abilityChance = 10;abilityDesc = "started turtling! All damage taken reduced by 90% for the next turn."; }
 		else if (ability == "fly")	{ canFly = true; abilityChance = 5;abilityDesc = "flew away from your attack and smashed back into you for 10 damage!"; }
-		else if (ability == "chug")	{ canChug = true; abilityChance = 15;abilityDesc = "chugged a keg and regained 15 HP!"; }
+		else if (ability == "chug")	{ canChug = true; abilityChance = 15;abilityDesc = "chugged a keg to regain 15 HP!"; }
 		def attack(Enemy:Player) =	{
 			var rand:Float = 0;
 			rand = Math.round(Math.random()*dmg+7);

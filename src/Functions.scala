@@ -1,5 +1,5 @@
 object Functions	{
-	import publicVariables._, publicClasses._, Entities._
+	import publicVariables._, publicClasses._
 	/* ---- LEVELS ---- */
 	def intro()	=	{
 		var retry = true;
@@ -92,7 +92,7 @@ object Functions	{
 			}
 			player = new Player( name, HP, Class );
 		}
-		println("Then so it was my noble "+Class+".\nThe evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
+		println("Then so it was my noble "+Class.toLowerCase+".\nThe evil Kan Krusher Kelman has taken power from the king of 4chan.\nYou must defeat him at all costs.");
 		if (mage)	{
 			println("The only things you take with you into the dark are your longsword, shortsword, bow, and knowledge of spells.");
 		}
@@ -110,8 +110,9 @@ object Functions	{
 			queueEnemies();
 			def queueEnemies() =	{
 				var maxEnemies = Math.round(Math.random()*5).toInt;
+				var monsterToQueue = new character("",0,0,0,"");
 				if (maxEnemies != 0)	{
-					var monsterToQueue = new character("",0,0,0,"");
+					monsterToQueue = new character("",0,0,0,"");
 					for (i <- 1 to maxEnemies)	{
 						var roll = Math.round(Math.random()*100);
 						var char = "";
@@ -136,14 +137,17 @@ object Functions	{
 						else	{
 							queue = queue :+ monsterToQueue;	//Operations continue as normal if it isn't.
 						}
+					}
 				}
+				if (queue.nonEmpty)	{			//I lied.
+					queue.drop(queue.length);	//Theoretically fixed the placeholder bug.
 				}
 			}
 		}
 	}
 	def printLevelInfo() =	{
 		//Prints the monsters in the room to the user.
-		if (queue.nonEmpty)	{
+		if (queue.nonEmpty && queue(0).name != "placeholder")	{	//placeholder bug fixed with ducttape and bubblegum.
 			println("Monsters in this room.\n------------------");
 			for (i <- 0 to queue.length-1)	{
 				if (i != queue.length-1)	{
@@ -224,7 +228,8 @@ object Functions	{
 				var usedAbility = false;
 				var turtling = false;
 				var clutched = false;
-				var absorbedOrDodgedOrFlew = false;
+				var absorbedOrDodged = false;
+				var flew = false;
 				var chugged = false;
 				var dead = false;
 				dicerolls();
@@ -254,7 +259,6 @@ object Functions	{
 							dead = false;
 							clutched = true;
 							usedAbility = true;
-							println(queue(0).name + " used "+queue(0).ability+" and was brought back to life!");
 							enemyAttack();
 						}
 						else	{
@@ -283,8 +287,11 @@ object Functions	{
 							if (queue(0).ability == "turtle")	{
 								turtling = true;
 							}
-							else if (queue(0).ability == "dodge" || queue(0).ability == "absorb" || queue(0).ability == "fly")	{
-								absorbedOrDodgedOrFlew = true;
+							else if (queue(0).ability == "dodge" || queue(0).ability == "absorb")	{
+								absorbedOrDodged = true;
+							}
+							else if (queue(0).ability == "fly")	{
+								flew = true;
 							}
 							else if (queue(0).ability == "chug")	{
 								chugged = true;
@@ -306,41 +313,61 @@ object Functions	{
 					if (usedMana)	{
 						println("By using "+wep+" you expended "+expMana+" mana. This leaves you at "+mana+" mana.");
 					}
-				
-					if (player.lastdmg > 0 && !absorbedOrDodgedOrFlew && !chugged)	{
-						println("You attacked "+queue(0).name+ s" with $wep for "+player.lastdmg+".");
-						println(queue(0).name+s"'s HP is now " + queue(0).hp + "/"+queue(0).maxhp);
+					if (flew)	{
+						if (player.lastdmg != 0)	{	//SHOULD FIX DRAKE PRINTINFO THEORETICALLY
+							println("You tried attacking "+queue(0).name+ s" with $wep but it flew away!");	
+							println(queue(0).name+" flew into the sky and smashed into your for 10 damage!");
+							println(queue(0).name+s"'s HP is still" + queue(0).hp + "/"+queue(0).maxhp);
+						}
+						else	{
+							println("You missed! "+queue(0).name+s"'s HP is still" + queue(0).hp + "/"+queue(0).maxhp);
+							println(queue(0).name+" flew into the sky and smashed into your for 10 damage!");
+						}
 					}
-					else if (!absorbedOrDodgedOrFlew && !chugged)	{
+					else if (absorbedOrDodged)	{  }
+					else if (player.lastdmg > 0 && !chugged)	{
+						println("You attacked "+queue(0).name+ s" with $wep for "+player.lastdmg+".");
+						if (!clutched)	{
+							println(queue(0).name+s"'s HP is now " + queue(0).hp + "/"+queue(0).maxhp);
+						}
+						else	{
+							println(queue(0).name+s"'s HP is now 0" + "/"+queue(0).maxhp);
+						}
+					}
+					else if (!absorbedOrDodged && !chugged)	{
 						println("You missed! " + queue(0).name+"'s HP is still " + queue(0).hp + "/"+queue(0).maxhp+"!");
 						missed = true;
 					}	
 					else if (chugged)	{
-						println("You attacked "+queue(0).name+ s" with $wep for "+player.lastdmg+".");
-						println("However "+queue(0).name+" used "+queue(0).ability+" and "+queue(0).abilityDesc);
+						if (!missed)	{
+							println("You attacked "+queue(0).name+ s" with $wep for "+player.lastdmg+".");
+							println("However "+queue(0).name+" used "+queue(0).ability+" and "+queue(0).abilityDesc);
+						}
+						else	{
+							println(s"Your attack with $wep missed!");
+							println(queue(0).name+" used "+queue(0).ability+" and "+queue(0).abilityDesc);
+						}
 						println(queue(0).name+s"'s HP is now " + queue(0).hp + "/"+queue(0).maxhp);
 					}
-					else	{}
+					else	{ }
 					
-					if (!usedAbility && !dead)	{
+					if (!usedAbility && !dead && queue(0).lastdmg != 0)	{
 						println(queue(0).name+s" attacked you for " + queue(0).lastdmg);
 					}
-					else if (queue(0).lastdmg == 0 && !dead)	{
+					else if (queue(0).lastdmg == 0 && !dead && !usedAbility)	{
 						println(queue(0).name+" missed!");
 					}
-					else if ((!dead || queue(0).ability == "fly") && !chugged)	{
+					else if (!dead && !chugged)	{
 						println(queue(0).name+" used "+queue(0).ability+"!");
 						if (!missed)	{
 							println(queue(0).name +" "+ queue(0).abilityDesc);
-						}
-						else if (queue(0).ability == "fly")	{
-							println(queue(0).name+" flew into the sky and smashed into your for 10 damage!");
+							println(queue(0).name+"'s HP is still "+queue(0).hp+"/"+queue(0).maxhp);
 						}
 						else	{
 							println("However it could not "+queue(0).ability+" your attack because you missed!");
 						}
 					}
-					println("Your HP is now "+player.hp+"/"+player.maxhp);
+					println("Your HP is "+player.hp+"/"+player.maxhp);
 				}
 			}
 		}
@@ -517,7 +544,7 @@ object Functions	{
 		//Otherwise if player too weak, buff.
 		else	{
 			player.hp += 20;
-			println("You drink a keg from off the ground. It restores your hp by 20 to "+player.hp);
+			println("You drink a keg from off the ground. It restores your hp by 20 to "+player.hp+".");
 		}
 		//Checks that the player isn't dead after the nerf. Is not longer needed due only nerfing if above 90 hp but I'm leaving it in.
 		if (player.hp > 0)	{

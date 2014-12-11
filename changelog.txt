@@ -1,88 +1,8 @@
 Known Bugs:
->Reset function bugged due to massive ammounts of variables I've added.	
-	>I think this is fixed but I'm not really sure.
-		>	What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[80]
-			2
-			Slime missed!
-			Your HP is now 80/80
-			
-	>0 DMG BUG NOT FIXED
-		
-	> Weird inconsistent ability bug for 'drake': Check Logic in printDamage();
-		>	By using lightning you expended 20 mana. This leaves you at 40 mana.
-			You attacked Drake with lightning for 10.
-			Drake's HP is now 0/35
-			Drake used fly!
-			Drake flew away from your attack and smashed back into you for 10 damage!
-			Your HP is now 64/80
-	
+>Reset function bugged due to massive amounts of variables I've added.	
 	>There are no monsters in the room. Check placeholder?
 		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 		
-	>placeholder bugged.
-		>	south
-			You enter the smokey southern room.
-			
-			Monsters in this room.
-			------------------
-			1. placeholder.
-			You will be facing placeholder first.
-			
-			You found no HP kegs in the room.
-			You regenerated 15 mana. Your total mana is now 100
-			What direction would you like to travel in?
-		> Only happened once and it seemed to be a random occurance? Odd.
-		
-	>Not sure if bug or not or just extremely lucky.
-		>	What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			Lizard used dodge!
-			Lizard dodged your attack!
-			Your HP is now 66/80
-
-			What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			Lizard used dodge!
-			Lizard dodged your attack!
-			Your HP is now 66/80
-
-			What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			Lizard used dodge!
-			Lizard dodged your attack!
-			Your HP is now 66/80
-
-			What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			Lizard used dodge!
-			Lizard dodged your attack!
-			Your HP is now 66/80
-
-			What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			Lizard used dodge!
-			Lizard dodged your attack!
-			Your HP is now 66/80
-
-			What weapon would you like to use to attack?
-			Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-			You can also use the spells: 'fireball'(4){15}, 'lightning'(5){20}, 'contortion'(6){25}. Mana[75]
-			2
-			You attacked Lizard with shortsword for 6.
-			Lizard's HP is now 0/6
-			Your HP is now 66/80
 
 
 TO DO:
@@ -98,6 +18,14 @@ TO DO:
 	> Ask Kelman about map regarding lower and top walls.
 	[IMPORTANT] > Rebalance player miss chances. The game can really be unfair and inbalanced if you get unlucky.
 	> Check for unused variables and remove them.
+	> Re-word clutch ability text?
+		>	4
+			By using fireball you expended 15 mana. This leaves you at 85 mana.
+			You attacked Lean Machine with fireball for 15.
+			Lean Machine's HP is now 15/15
+			Lean Machine used clutch!
+			Lean Machine came back to life with 15 hp.
+			Your HP is now 67/80
 
 	> [Optional] Different special abilities depending on player class
 		>Add stamina required to execute these.
@@ -120,6 +48,13 @@ Done:
 	
 	
 Changelog:
+	BUILD v1.3:
+		* Fixed lean machine clutch bug.
+		* Fixed placeholder bug, theoretically.
+		* Fixed slime and lizard absorb/dodge bug where it only printed 'monster missed!'.
+		* Fixed drake fly bug.
+		* Fixed monster 'attacked for 0 dmg.' bug.
+
 	BUILD v1.2:
 		* Restructured monsters to use a class based system.
 		* Created (within character && player class) useAbility and attack functions.
