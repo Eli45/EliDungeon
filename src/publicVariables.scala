@@ -36,8 +36,8 @@ object publicVariables	{
 	);
 	//Possibility to miss. 45 = 45%(not anymore).
 	val missChances = Map(
-		"longsword" -> 45,	//44%	This is because of our use of < instead of <=.
-		"shortsword" -> 25,	//24%
+		"longsword" -> 30,	//29%	This is because of our use of < instead of <=.
+		"shortsword" -> 18,	//17%
 		"bow" -> 7,			//6%
 		"fireball" -> 0,
 		"lightning" -> 0,
@@ -111,16 +111,47 @@ object publicVariables	{
 		var r = readLine();
 		if (r.equalsIgnoreCase("Y") || r.equalsIgnoreCase("Yes"))	{
 			play = true;
-			linksTo = Array("").drop(1);
-			curLvl = 1;
-			queue = Array(placeholder).drop(1);
-			wep = "";
-			boss = false;
+			linksTo = Array("").drop(1);	//Array for the 4 possible directions.
+			prevEnv = Array("","dark","","","","","","","","",""); //Array for previous lvlenv. //1st lvl always dark.
+			//element 0 is used as a placeholder.
+			Class = "";
+			name = "";
+			ammo = 10;
 			mage = false;
 			mana = 100;
-			ammo = 10;
-			prevEnv = Array("","dark","","","","","","","","","");
-			Class = "";
+			weapons = Map(
+				"longsword" -> 13,
+				"shortsword" -> 8,
+				"bow" -> 6,
+				"1" -> 13,
+				"2" -> 8,
+				"3" -> 6,
+				//Special mage powers. Requires mana.
+				"fireball" -> 14,	//20 mana
+				"lightning" -> 18, //30 mana
+				"contortion" -> 23, //45 mana
+				"4" -> 14,
+				"5" -> 18,
+				"6" -> 23
+			);
+			minVal = Map(
+				"longsword" -> 7,
+				"shortsword" -> 5,
+				"bow" -> 4,
+				"fireball" -> 7,	//Special mage powers. Requires mana.
+				"lightning" -> 9,
+				"contortion" -> 11
+			);
+			curLvl = 1;
+			placeholder = new character("",0,0,0,"");
+			queue = Array(placeholder).drop(1);
+			player = new Player("",0,"");
+			wep = "";
+			Explored = Array(0).drop(1);	//Will keep track of all the levels we have explored.
+			boss = false;
+			wepDMG = 0;
+			missChance = 0;
+			minDMG = 0;
 		}
 		else	{
 			play = false;

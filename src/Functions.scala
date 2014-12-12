@@ -248,7 +248,6 @@ object Functions	{
 						else if (wep == "contortion")	{mana -= 25; expMana = 25; usedMana = true; }	
 					}
 					if (queue(0).hp <= 0) { queue(0).hp = 0; dead = true; }
-
 				}
 				//If monster is dead then we drop the current one and face the next.
 				if (queue(0).hp <= 0) {
@@ -565,7 +564,7 @@ object Functions	{
 		println();
 		println("You have defeated the evil Kan Krusher Kelman and saved the kingdom from his evil.");
 		println("Upon your return you are granted command of 4chan.\nNow it is your turn to lead the kingdom to glory.");
-		println("The tales of "+name+", a noble "+Class+", will be sung throughout the lands for centuries to come.")
+		println("The tales of "+name+", a noble "+Class.toLowerCase+", will be sung throughout the lands for centuries to come.")
 		println("----  VICTORY  ----");
 		println("---- GAME OVER ----");
 	}

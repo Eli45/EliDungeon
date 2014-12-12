@@ -1,20 +1,11 @@
 Known Bugs:
-	>Reset function bugged due to massive amounts of variables I've added since I created it.
 	>There are no monsters in the room. Check placeholder?
 		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 		
 TO DO:
-
-	> Remove Entities.scala
-	
 	> Ask Kelman about map regarding lower and top walls.
 	
-	
-	[IMPORTANT] > Rebalance player miss chances. The game can really be unfair and inbalanced if you get unlucky.
-		> Longsword, shortsword.
-	
-	
-	> Check for unused variables and remove them.
+	> Buff shortsword.
 
 	> [Optional] Different special abilities depending on player class
 		>Add stamina required to execute these.
@@ -31,6 +22,13 @@ TO DO:
 				> DOES NOT REWARD LOOT.
 				
 Changelog:
+	BUILD v1.4:
+		* Buffed player miss chances for longsword and it seems okay now.
+			* However the shortsword still sucks. It may need a straight up damage buff. Will return to later.
+		* Removed mentions of Entities.scala
+		* Minor text-typo fixes.
+		* Updated reset function.
+		
 	BUILD v1.3:
 		* Fixed lean machine clutch bug.
 		* Fixed placeholder bug, theoretically.
