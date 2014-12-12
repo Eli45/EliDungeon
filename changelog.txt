@@ -6,8 +6,16 @@ TO DO:
 	> Ask Kelman about map regarding lower and top walls.
 	
 	> Buff shortsword.
+	
+	> [IDEA][OPTIONAL] Randomly generated enemy HP and damage.
+		> Enemy description
+			> Large damage: Huge. (Ex : 'Huge Slime'.)
+			> Semi-large damage: Large.
+			> Normal damage: (none).
+			> Semi-small damage: Small.
+			> Small damage: Micro.
 
-	> [Optional] Different special abilities depending on player class
+	> Different special abilities depending on player class
 		>Add stamina required to execute these.
 		>Knight
 			> Flurry
