@@ -1,5 +1,5 @@
 Known Bugs:
->Reset function bugged due to massive amounts of variables I've added.	
+	>Reset function bugged due to massive amounts of variables I've added since I created it.
 	>There are no monsters in the room. Check placeholder?
 		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 		
@@ -37,8 +37,12 @@ Changelog:
 		* Fixed slime and lizard absorb/dodge bug where it only printed 'monster missed!'.
 		* Fixed drake fly bug.
 		* Fixed monster 'attacked for 0 dmg.' bug.
+		
+		
+	BUILD v1.27:
+		* Fixed bug with lean machine text display and clutch chance.
 
-	BUILD v1.2:
+	BUILD v1.25:
 		* Restructured monsters to use a class based system.
 		* Created (within character && player class) useAbility and attack functions.
 		* Abilities:		
@@ -65,6 +69,15 @@ Changelog:
 						*90% of player damage absorbed.
 						*Applies to next turn.
 						*Only usable once.
-
 		* Updated damage display. Now displays maxhp(starting health).
 		* Fixed major lean machine bug that crashed the program when lean machine is attacked.
+						
+		BUILD v1.1:
+			* Mage spell cost reduced.
+			* Spells minimum damage dealt increased across the board.
+			* Minor typo fixes.
+			* Made the code look prettier.
+			* Fixed bugs with mana not being drained.
+			* Updated some documentation on code.
+
+		
