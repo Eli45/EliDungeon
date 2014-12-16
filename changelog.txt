@@ -2,6 +2,18 @@ Known Bugs:
 	>There are no monsters in the room. Check placeholder?
 		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 		
+	> Drake print ability bug:
+		What weapon would you like to use to attack?
+		Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
+		2
+		You tried attacking Drake with shortsword but it flew away!
+		Drake flew into the sky and smashed into your for 10 damage!
+		Drake's HP is still13/35
+		Drake used fly!
+		Drake flew away from your attack and smashed back into you for 10 damage!
+		Drake's HP is still 13/35
+		Your HP is 54/95
+
 TO DO:
 	> Ask Kelman about map regarding lower and top walls.
 	
