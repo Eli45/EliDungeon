@@ -1,47 +1,12 @@
-Known Bugs:
-	>There are no monsters in the room. Check placeholder?
-		>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
-		
-	> Drake print ability bug:
-		What weapon would you like to use to attack?
-		Weapons include: 'longsword'(1), 'shortsword'(2), 'bow'(3)[10].
-		2
-		You tried attacking Drake with shortsword but it flew away!
-		Drake flew into the sky and smashed into your for 10 damage!
-		Drake's HP is still13/35
-		Drake used fly!
-		Drake flew away from your attack and smashed back into you for 10 damage!
-		Drake's HP is still 13/35
-		Your HP is 54/95
+KNOWN ISSUES:
+	* Shortsword is weak but it's too late to be balanced.
 
-TO DO:
-	> Ask Kelman about map regarding lower and top walls.
-	
-	> Buff shortsword.
-	
-	> [IDEA][OPTIONAL] Randomly generated enemy HP and damage.
-		> Enemy description
-			> Large damage: Huge. (Ex : 'Huge Slime'.)
-			> Semi-large damage: Large.
-			> Normal damage: (none).
-			> Semi-small damage: Small.
-			> Small damage: Micro.
-
-	> Different special abilities depending on player class
-		>Add stamina required to execute these.
-		>Knight
-			> Flurry
-				>
-		>Archer
-			> Volley
-				>0% chance to miss.
-				>Deals 3x the damage of a single arrow.
-		>Assassin
-			> Sneak
-				> Enemy has a 70% chance of not seeing you and allowing you to exit the room with no combat.
-				> DOES NOT REWARD LOOT.
 				
 Changelog:
+	RELEASE BUILD v1.5:
+		* Fixed placeholder bug when entering first room.
+		* Fixed drake ability print bug.
+		
 	BUILD v1.4:
 		* Buffed player miss chances for longsword and it seems okay now.
 			* However the shortsword still sucks. It may need a straight up damage buff. Will return to later.

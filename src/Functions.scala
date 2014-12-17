@@ -316,7 +316,7 @@ object Functions	{
 						if (player.lastdmg != 0)	{	//SHOULD FIX DRAKE PRINTINFO THEORETICALLY
 							println("You tried attacking "+queue(0).name+ s" with $wep but it flew away!");	
 							println(queue(0).name+" flew into the sky and smashed into your for 10 damage!");
-							println(queue(0).name+s"'s HP is still" + queue(0).hp + "/"+queue(0).maxhp);
+							println(queue(0).name+s"'s HP is still " + queue(0).hp + "/"+queue(0).maxhp);
 						}
 						else	{
 							println("You missed! "+queue(0).name+s"'s HP is still" + queue(0).hp + "/"+queue(0).maxhp);
@@ -356,7 +356,7 @@ object Functions	{
 					else if (queue(0).lastdmg == 0 && !dead && !usedAbility)	{
 						println(queue(0).name+" missed!");
 					}
-					else if (!dead && !chugged)	{
+					else if (!dead && !chugged && !flew)	{
 						println(queue(0).name+" used "+queue(0).ability+"!");
 						if (!missed)	{
 							println(queue(0).name +" "+ queue(0).abilityDesc);

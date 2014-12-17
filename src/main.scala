@@ -1,6 +1,4 @@
 object main extends App {
-	//Ask Kelman about makeMap(); function regarding bottom walls.
-	//Look at NewClassTest.scala
 	import publicVariables._, publicClasses._, Functions._
 	while (play)	{
 		intro();

@@ -94,8 +94,8 @@ object publicVariables	{
 	);
 	//end Specific monster damages.
 	var curLvl = 1;
-	var placeholder = new character("",0,0,0,"");
-	var queue:Array[character] = Array(placeholder).drop(1);
+	var placeholder = new character("placeholder",0,0,0,"");
+	var queue:Array[character] = Array(placeholder);
 	var player = new Player("",0,"");
 	var wep = "";
 	var Explored = Array(0).drop(1);	//Will keep track of all the levels we have explored.
