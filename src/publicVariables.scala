@@ -143,8 +143,8 @@ object publicVariables	{
 				"contortion" -> 11
 			);
 			curLvl = 1;
-			placeholder = new character("",0,0,0,"");
-			queue = Array(placeholder).drop(1);
+			placeholder = new character("placeholder",0,0,0,"");
+			queue = Array(placeholder);
 			player = new Player("",0,"");
 			wep = "";
 			Explored = Array(0).drop(1);	//Will keep track of all the levels we have explored.
